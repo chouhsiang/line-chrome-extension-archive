@@ -1,0 +1,2411 @@
+<!DOCTYPE html><html lang="en"><head><title>LINE</title><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google" content="notranslate"><link rel="stylesheet" href="/res/css/line_chrome.min.css"></head><body id="app_body" on="" style="user-select:none"><div class="MdOverlay02 MdNonDisp"></div><div class="MdLoading01 MdNonDisp" id="login_loading" style="z-index:50">Loading...</div><div class="LyWrap MdRegionDrag" id="login_area"></div><div id="mainApp" class="MdNonDisp"></div><div id="wrap_debug" class="MdNonDisp LyContents MdRegionNod" style="position: absolute; z-index:120;min-width:730px;left:50%; top: 50%; height: 80%; background-color: #fff;transform:translate(-50%, -50%);border:1px solid #BDBDBD"></div><div id="nonclickable_layer" class="MdOverlay01 MdNonDisp"></div><div id="wrap_image_viewer_layer" role="main" class="MdNonDisp"></div><div id="wrap_collections_viewer_layer" role="main" class="MdNonDisp"></div><div tabindex="1" id="layer_contents" class="MdOverlay01 MdNonDisp"></div><div id="alert_layer_contents" class="MdOverlay01 MdNonDisp"></div><div id="context_menu" class="MdLYR01Box" style="z-index:121"></div><div id="wrap_date_picker" class="MdOverlay01 MdNonDisp" style="z-index:131"></div><audio id="notiAudio" src="res/audio/Bell.wav"></audio><canvas id="canvass" class="MdNonDisp"></canvas><div class="MdLYR04Skin"></div></body><div id="template"><script id="TEMPLATE_MAINAPP_SKIN" type="text/template"><button type="button" class="MdBtn01Skin MdNonDisp" id="app_skin_set_btn" title="<%=GNB_BTN_BGSETTING%>">Skin</button>
+        <ul class="mdLYR04Ul MdNonDisp" id="app_skin_list">
+            <li class="mdLYR04Li ExSelected" data-skin="DEF"><img src="/res/img/skin/img_color_01.png"></li>
+            <li class="mdLYR04Li" data-skin="IL01"><img src="/res/img/skin/img_illustration_01.png"></li>
+            <li class="mdLYR04Li" data-skin="IL02"><img src="/res/img/skin/img_illustration_02.png"></li>
+            <li class="mdLYR04Li" data-skin="IL03"><img src="/res/img/skin/img_illustration_03.png"></li>
+            <li class="mdLYR04Li" data-skin="PN01"><img src="/res/img/skin/img_pattern_01.png"></li>
+            <li class="mdLYR04Li" data-skin="PN02"><img src="/res/img/skin/img_pattern_02.png"></li>
+            <li class="mdLYR04Li" data-skin="PN03"><img src="/res/img/skin/img_pattern_03.png"></li>
+            <li class="mdLYR04Li" data-skin="PH01"><img src="/res/img/skin/img_photo_01.png"></li>
+            <li class="mdLYR04Li" data-skin="PH02"><img src="/res/img/skin/img_photo_02.png"></li>
+        </ul></script><script id="TEMPLATE_MAINAPP" type="text/template"><div class="LyWrap">
+            <header class="LyHead MdRegionDrag"></header>
+
+            <div class="MdOverlay01 MdNonDisp" id="wrap_webview_layout"></div>
+
+            <div id="wrap_create_group" class="LyContents MdNonDisp">
+                <div class="LyLFT MdPB0" id="createGroupLeftContent"></div>
+                <div class="LyLFT MdPB0 slideInOutFold" id="createGroupLeftSlideLayer"></div>
+                <div class="LyRGT MdPB0" id="createGroupRightContent"></div>
+                <div class="LyRGT MdPB0 slideInOutFold" id="createGroupRightSlideLayer"></div>
+            </div>
+            <div id="wrap_settings" class="MdNonDisp" style="max-width: 1024px;margin: 0 auto;"></div>
+            <div id="wrap_note" class="MdNonDisp" style="max-width: 1024px;margin: 0 auto;"></div>
+
+            <div id="default_content" class="LyContents">
+
+                <div id="leftSide" class="LyLFT" style="overflow:hidden">
+                    <div id="wrap_network_alram" class="MdLFT03Notice mdLFT03Type01 MdNonDisp"><p class="MdTxtInfo03"><%=COMMON_NETWORK_UNREACHABLE%></p></div>
+                    <div id="wrap_message_sync" class="MdLFT03Notice mdLFT03Type02 MdNonDisp"><%=CHAT_MSG_SYNC%> 0%</div>
+                    <div id="wrap_chat_list" class="lyLFTInner"></div>
+                    <div id="wrap_contact_list" class="lyLFTInner MdNonDisp"></div>
+                    <div id="wrap_group_list" class="lyLFTInner MdNonDisp"></div>
+                    <div id="wrap_recommend_list" class="lyLFTInner MdNonDisp"></div>
+
+                    <div id="wrap_start_chat_list" class="lyLFTInner lyLFTHide"></div>
+                    <div id="wrap_selectContact_list" class="lyLFTInner lyLFTHide"></div>
+                    <div id="wrap_forward_list" class="lyLFTInner lyLFTHide"></div>
+
+                    <div class="MdLFT07Nav">
+                        <ul class="mdLFT07Ul"></ul>
+                    </div>
+
+                </div>
+
+                <div class="LyRGT" id="rightSide">
+                </div>
+
+            </div>
+            <div id="mini_content" class="LyContents MdNonDisp"></div>
+        </div></script><script id="TEMPLATE_FOOTER_MENU_VIEW" type="text/template"><ul class="mdLFT07Ul"></ul></script><script id="TEMPLATE_LAYER_POPUP" type="text/template"><dialog open="" class="MdLYR01Box mdLYR01Type01 mdLYR01P50" role="dialog" style="min-width:350px">
+            {{#displayHelpBtn}}
+            <button type="button" class="MdBtn01Help _layer_help">Help</button>
+            {{/displayHelpBtn}}
+            {{#title}}
+              <p class="mdLYR01Desc02 typeA">{{&title}}</p>
+            {{/title}}
+            <p class="mdLYR01Desc02 typeB">{{&message}}</p>
+            <div class="MdCMN10BtnSet mdCMN10TypeH01">
+                <button type="button" class="MdBtn03D01 mdBtn03S _layer_left">{{leftBtnName}}</button>
+                {{#displayRightBtn}}
+                <button type="button" class="MdBtn03D03 mdBtn03S _layer_right">{{rightBtnName}}</button>
+                {{/displayRightBtn}}
+            </div>
+        </dialog></script><script id="TEMPLATE_DATE_PICKER_POPUP" type="text/template"><div style="position:relative;left:50%;top: 50%;width:250px;transform: translate(-50%, -50%);">
+            <input id="datepicker_date" type="date"/>
+            <input id="datepicker_submit" type="button" value="Submit"/>
+        </div></script><script id="TEMPLATE_ALERT_POPUP" type="text/template"><dialog open="" class="MdLYR01Box mdLYR01Type01 mdLYR01P50" role="dialog" style="width: 406px;">
+                <p class="mdLYR01Desc02 typeA">{{&title}}</p>
+                <p class="mdLYR01Desc02 typeB">{{&desc}}</p>
+                <div class="MdCMN10BtnSet mdCMN10TypeH01">
+                    <button type="button" class="MdBtn03D04 mdBtn03S">{{leftBtnName}}</button>
+                    {{#displayRightBtn}}
+                    <button type="button" class="MdBtn03D03 mdBtn03S">{{rightBtnName}}</button>
+                    {{/displayRightBtn}}
+                    <!--/MdCMN10BtnSet--></div>
+            </dialog></script><script id="TEMPLATE_LOGIN_LAYOUT_VIEW" type="text/template"><header class="LyHead">
+            <button type="button" class="MdBtn01Back MdNonDisp" id="login_back">Back</button>
+        </header>
+        <div class="LyContents" id="login_content"></div></script><script id="TEMPLATE_LOGIN_EMAIL_VIEW" type="text/template"><section class="MdCMN01LoginNew mdCMN01Mail MdRegionNod" id="login_wrap_section">
+            <h1 class="mdCMN01Line"><%= GNB_LABEL_LINE_TITLE %></h1>
+
+            <div id="login_wrap_normal">
+                <ul class="MdFormTabs">
+                    <li class="TabsEmail">
+                        <button type="button" title="E-mail Login" id="login_email_btn"><%= LOGIN_TAB_EMAILLOGIN %></button>
+                    </li>
+                    <li class="TabsQR">
+                        <button type="button" title="QR Code Login" id="login_qr_btn"><%= LOGIN_TAB_SIMPLELOGIN %></button>
+                    </li>
+                </ul>
+
+                <div class="MdFormGroup01 Mail" id="login_email_area">
+                    <div class="MdInputTxt03 mdInputTxt03UnderBorder mdInputTxt03Help"><input type="text" placeholder="<%= LOGIN_EMAILLOGIN_PLACEHOLDER_EMAIL %>" id="line_login_email" autocomplete="off" tabindex="1">
+                        <button type="button" class="MdBtn01Help" title="<%= LOGIN_REGISTER_ALREADY %>" id="login_email_help"><%= LOGIN_REGISTER_ALREADY %></button>
+                    </div>
+                    <div class="MdInputTxt03"><input type="password" placeholder="<%= LOGIN_EMAILLOGIN_PLACEHOLDER_PASSWORD %>" id="line_login_pwd" tabindex="2"></div>
+                    <!--/MdFormGroup01 Mail--></div>
+
+                <div class="MdFormGroup01 QR MdNonDisp" id="login_qrcode_area"></div>
+            </div>
+
+            <div id="login_wrap_phone_number" class="MdNonDisp">
+                <ul class="MdFormTabs">
+                    <li class="TabsOnlyTitle">
+                        <div><%= LOGIN_TAB_PHONE_NUMBER_TITLE %></div>
+                    </li>
+                </ul>
+
+                <div class="MdFormGroup01">
+                    <div class="MdInputTxt03 mdInputTxt03Phone mdInputTxt03UnderBorder mdInputTxt03Help">
+                        <div class="MdInputRegionSelect">
+                            <button type="button" class="MdBtn01SelectRegion" id="login_select_country_code">+81</button>
+                            <div class="MdLYR05SelectRegion MdNonDisp MdRegionNod" id="login_select_country_code_layer">
+                                <div class="MdScroll mdScroll01" style="width:273px; height: 208px;">
+                                    <h1 class="MdHide">Country list</h1>
+                                    <ul class="MdCMN03List mdCMN03RegionPop ExHover" id="login_country_list_layer"></ul>
+                                    <!--/MdScroll--></div>
+                                <!--/MdLYR05SelectRegion--></div>
+                            <!--/MdInputRegionSelect--></div>
+                        <input type="text" class="PhoneNumber" placeholder="<%= LOGIN_EMAIL_PLACEHOLDER_PHONE %>" id="login_phone_number" tabindex="1" value="">
+                        <button type="button" class="MdBtn01Help" title="LINE User Login" id="login_phone_help">LINE User Login</button>
+                    </div>
+                    <div class="MdInputTxt03"><input type="password" placeholder="<%= LOGIN_EMAILLOGIN_PLACEHOLDER_PASSWORD %>" id="login_phone_pwd" tabindex="2" value=""></div>
+                    <!--/MdFormGroup01--></div>
+            </div>
+
+            <p class="mdCMN01Error" id="login_incorrect" style="display:none"></p>
+
+            <div class="MdCMN10BtnSet">
+                <button type="button" class="MdBtn03D01 mdBtn03Login " disabled="false" id="login_btn"><%= LOGIN_BTN_LOGIN %></button>
+            </div>
+
+            <p class="mdCMN01Link MdRegionNod">
+                <a href="#" id="login_phone_number_login"><%= LOGIN_BTN_PHONE_NUMBER_LABEL %></a>
+                <a href="#" id="login_normal_login" class="MdNonDisp"><%= LOGIN_BTN_EMAIL_QRCODE_LABEL %></a>
+            </p>
+        </section>
+
+        <ul class="MdCMN02ListNew MdRegionNod">
+            <li id="login_forgot_pwd"><a href="#" class="MdTxtForgot _forgot_pwd"><%= LOGIN_LINK_FORGOT_YOUR_PASSWORD %></a>|<a href="#" class="_login_help"><%= SETTING_HELP %></a></li>
+            <li id="login_qrcode_help" class="MdNonDisp"><a href="#" class="MdTxtInfo01 _qr_howto"><%= LOGIN_SIMPLELOGIN_LINK_HOWTO %></a>|<a href="#" class="_login_help"><%= SETTING_HELP %></a></li>
+            <li id="login_phone_number_help" class="MdNonDisp"><a href="#" class="MdTxtInfo01 _login_help"><%= SETTING_HELP %></a></li>
+            <!--/MdCMN02ListNew--></ul>
+
+        <div class="MdOverlay01 MdNonDisp" id="login_email_reg_layer">
+            <div class="MdLYR03Box">
+                <button type="button" class="MdBtn01Close04" id="login_close_email_reg_layer"><%= COMMON_CLOSE %></button>
+                <h1 class="mdLYR03Ttl"><%= LOGINHELP_EMAILLOGIN_LABEL_TITLE %></h1>
+                <ol class="mdLYR03Ol mdLYR03Email">
+                    <li>1. <%= LOGINHELP_EMAILLOGIN_LABEL_STEP1 %></li>
+                    <li>2. <%= LOGINHELP_EMAILLOGIN_LABEL_STEP2 %></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="MdOverlay01 MdNonDisp" id="login_email_reg_layer">
+            <div class="MdLYR03Box">
+                <button type="button" class="MdBtn01Close04" id="login_close_email_reg_layer">Close</button>
+                <h1 class="mdLYR03Ttl typeA"><%= LOGINHELP_EMAILLOGIN_LABEL_TITLE %></h1>
+                <div class="tab">
+                    <!-- class="on" : 활설화 -->
+                    <button type="button" class="on" id="login_email_regist_mobile_btn"><%= LOGINHELP_EMAILLOGIN_LABEL_TAB_MOBILE %></button>
+                    <button type="button" class="" id="login_email_regist_pc_btn"><%= LOGINHELP_EMAILLOGIN_LABEL_TAB_PC %></button>
+                </div>
+
+                <!-- [Mobile] -->
+                <ol class="mdLYR03Ol mdLYR03Email" id="login_email_regist_mobile">
+                    <li>1. <%= LOGINHELP_EMAILLOGIN_LABEL_STEP1 %></li>
+                    <li>2. <%= LOGINHELP_EMAILLOGIN_LABEL_STEP2 %></li>
+                </ol>
+
+                <!-- [PC] -->
+                <div class="stateEmailRegister MdNonDisp" id="login_email_regist_pc">
+                    <h2><%= LOGINHELP_EMAILLOGIN_LABEL_TAB_PC_TITLE1 %></h2>
+                    <div class="text">
+                        <%= LOGINHELP_EMAILLOGIN_LABEL_TAB_PC_DESC1 %>
+                        <img src="/res/img/common/email_pc_{{locale}}.png" width="525" height="182" alt="email register">
+                    </div>
+                    <h2><%= LOGINHELP_EMAILLOGIN_LABEL_TAB_PC_TITLE2 %></h2>
+                    <div class="text">
+                        <%= LOGINHELP_EMAILLOGIN_LABEL_TAB_PC_DESC2 %>
+                    </div>
+                </div>
+                <!--/MdLYR03Box--></div>
+            <!--/MdOverlay01--></div>
+
+        <div class="MdOverlay01 MdNonDisp" id="login_regist_layer">
+            <div class="MdLYR03Box mdLYR03New">
+            </div>
+        </div>
+
+        <div class="MdOverlay01 MdNonDisp" id="login_qrcode_help_layer">
+            <div class="MdLYR03Box">
+                <button type="button" class="MdBtn01Close04 _qrcode_layer_close"><%= COMMON_CLOSE %></button>
+                <h1 class="mdLYR03Ttl"><%= LOGINHELP_QRCODELOGIN_LABEL_TITLE %></h1>
+                <ol class="mdLYR03Ol mdLYR03QR">
+                    <li>1. <%= LOGINHELP_QRCODELOGIN_LABEL_STEP1 %></li>
+                    <li>2. <%= LOGINHELP_QRCODELOGIN_LABEL_STEP2 %></li>
+                </ol>
+            </div>
+        </div></script><script id="TEMPLATE_LOGIN_PINCODE_VIEW" type="text/template"><section class="MdCMN01Login mdCMN01Verify">
+            <h1 class="mdCMN01Ttl"><%= AUTHORIZE_WINDOW_TITLE %></h1>
+
+            <p class="mdCMN01Desc01"><%= AUTHORIZE_CONTENT_DESC1 %></p>
+
+            <div class="mdCMN01Code">{{pinCode}}</div>
+            <p class="mdCMN01Time"><%= AUTHORIZE_REMAINED_TIME %> <span id="pincode_remain_time">02:30</span></p>
+
+            <p class="mdCMN01Desc02"><%= AUTHORIZE_CONTENT_DESC2 %></p>
+
+            <p class="MdTxtInfo02"><%= AUTHORIZE_CONTENT_DESC3 %></p>
+
+        </section></script><script id="TEMPLATE_LOGIN_SMS_CONFIRM_VIEW" type="text/template"><section class="MdCMN01LoginNew mdCMN01Verify MdRegionNod">
+            <h1 class="mdCMN01Ttl"><%= AUTHORIZE_WINDOW_TITLE %></h1>
+            <div class="mdCMN01Code"><input type="text" value="" id="sms_input" class=""></div>
+            <p class="mdCMN01Number">{{sessionForSMSConfirm.normalizedPhone}}</p>
+            <p class="mdCMN01Desc02"><%= LOGIN_PC_VERIFICATION_DESC %></p>
+            <p class="mdCMN01Desc03">{{#showResend}}<a href="#" id="sms_resend"><%= LOGIN_PC_VERIFICATION_BTN_RESEND_PIN_LABEL %></a>{{/showResend}}{{#showCall}}<a href="#" id="sms_call_me_instead"><%=
+                LOGIN_PC_VERIFICATION_BTN_PHONE_CALL_LABEL %></a>{{/showCall}}</p>
+            <div class="MdCMN10BtnSet">
+                <button type="button" class="MdBtn03D01 mdBtn03Login" id="sms_ok" disabled>OK</button>
+                <!--/MdCMN10BtnSet--></div>
+            <!--/MdCMN01Login--></section></script><script id="TEMPLATE_LOGIN_QRCODE_VIEW" type="text/template"><div class="mdCMN01Img _qrcode_wrap MdNonDisp">
+            <div></div>
+            <button type="button" class="MdBtn01Reload" id="login_qrcode_reload">Reload</button>
+        </div>
+        <div class="mdCMN01Img mdCMN01Loading MdNonDisp" id="login_qrcode_loading">
+            <div class="MdLoading01">Loading...</div>
+        </div></script><script id="TEMPLATE_LOGIN_COUNTRY_LIST" type="text/template">{{#countryList}}
+        <li class="_select_country{{#isSelected}} ExSelected{{/isSelected}}"><a href="#" class="MdCMN03CountryItem _select_country" data-code="{{countryCode}}">{{name}} +{{code}}</a></li>
+        {{/countryList}}</script><script id="TEMPLATE_RESET_PASSWORD" type="text/template"><img src="/res/img/reset-password-qrcode.png" class="_noThumb">
+        <span class="mdLYR01Desc02 typeA">{{TITLE}}</span>
+        {{DESCRIPTION}}</script><script id="TEMPLATE_HEADER_VIEW" type="text/template"><div class="lyHeadInner">
+            <div class="lyHeadInner2" id="label_main">
+                <div class="MdGHD01Head">
+                    <button type="button" class="mdGHD01LineBtn _click">
+                        <h1 class="mdGHD01Line">LINE</h1>
+                    </button>
+                    <button type="button" class="mdGHD01SettingBtn _globalSetting _click">
+                        <span class="mdGHD01Setting"><%= SETTING_LABEL_TITLE %></span>
+                    </button>
+                </div>
+
+                <div class="MdGHD03Global">
+                    <ul class="mdGHD03Ul" id="header_quick_button_wrap">
+                        <li class="ExSelected">
+                            <button type="button" class="mdGHD03Chats _click" title="<%= GNB_LABEL_CHAT %>"><%= GNB_LABEL_CHAT %></button>
+                            <div id="_header_chat_queue" class="MdIcoBadge03 MdNonDisp"></div>
+                        </li>
+                        <li>
+                            <button type="button" class="mdGHD03Note _click" title="<%= GNB_LABEL_MEMO %>"><%= GNB_LABEL_MEMO %></button>
+                        </li>
+                        <li class="lastMenu">
+                            <button type="button" class="mdGHD03Timeline _click" title="<%= GNB_LABEL_TIMELINE %>"><%= GNB_LABEL_TIMELINE %></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lyHeadInner2 MdNonDisp" id="label_start_chat">
+                <button class="MdGHD01Head mdGHD01Back MdRegionNod _click"><h1 class="mdGHD01Ttl"><%= GNB_MENU_STARTTALK %></h1></button>
+            </div>
+
+            <div class="lyHeadInner2 MdNonDisp" id="label_create_a_group">
+                <button class="MdGHD01Head mdGHD01Back MdRegionNod _click"><h1 class="mdGHD01Ttl"><%= GNB_MENU_CREATEGROUP %></h1></button>
+            </div>
+
+            <div class="lyHeadInner2 MdNonDisp" id="label_setting">
+                <button class="MdGHD01Head mdGHD01Back MdRegionNod _click"><h1 class="mdGHD01Ttl"><%= GNB_MENU_SETTING %></h1></button>
+            </div>
+
+            <div class="MdGHD04List MdNonDisp" id="header_menu">
+                <ul class="mdGHD04Ul" id="header_menu_layer">
+                </ul>
+            </div>
+        </div>
+
+        <div id="mini_header" class="MdGHD02Util MdNonDisp">
+            <a href="#" class="mdGHD02Expand" title="Default Window" id="change_default_window">Default Window</a>
+        </div></script><script id="TEMPLATE_FOOTER_MENU_ITEM" type="text/template"><button type="button" class="{{className}}  {{#isSelected}}ExSelected{{/isSelected}}" title="{{label}}">{{label}}</button>
+        {{#badgeCount}}
+        <div class="MdIcoBadge02">{{badgeCount}}</div>
+        {{/badgeCount}}</script><script id="TEMPLATE_CONTEXT_MENU" type="text/template"><ul class="MdCMN06List"></ul></script><script id="CONTEXT_MENU_ITEM_TEMPLATE" type="text/template"><div href="#" {{#line}}style="border-top:1px solid #f0f1f4;" {{/line}} >{{displayName}}</div></script><script id="TEMPLATE_CONTACT_LAYOUT" type="text/template"><div class="MdLFT01Search _wrap_search">
+            <div class="mdLFT01Inner">
+                <input type="text" class="mdLFT01Input" id="search_input" placeholder="<%= SEARCH_FRINEDLIST_HINT %>" value="">
+                <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+            </div>
+            <button id="_contact_chatmenu" type="button" class="MdBtn01More">More</button>
+        </div>
+
+        <div id="contact_mode_contact_list" class="MdScroll mdScroll01" style="height: 467px;">
+            <h1 class="MdHide"><%= GNB_MENU_BUDDYLIST %></h1>
+            <div class="MdNonDisp" id="contact_wrap_new_friends"></div>
+            <div class="MdNonDisp" id="contact_wrap_favorite_friends"></div>
+            <div class="" id="contact_wrap_friends"></div>
+            <div class="MdNonDisp" id="contact_wrap_search_friends"></div>
+        </div></script><script id="TEMPLATE_SUB_CONTACT" type="text/template"><div class="MdLFT04Head _contactlist_header"><h2 class="mdLFT04Ttl">{{displayName}} <span id="contact_friend_count" class="_contact_count">{{count}}</span></h2></div>
+        <ul class="MdCMN03List ExHover">
+        </ul></script><script id="TEMPLATE_SUB_CONTACT_NO_HEADER" type="text/template"><ul class="MdCMN03List ExHover"></ul></script><script id="TEMPLATE_CONTACT_ITEM" type="text/template"><div class="MdCMN04Item">
+            <div class="mdCMN04Img">
+                <img src="{{profileUrl}}" width="46" height="46" alt="{{placeHolderDisplayName}}" class="_profile_img">
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{printName}}</span>
+                </div>
+                <p class="mdCMN04Desc">{{statusMessage}}</p>
+            </div>
+        </div></script><script id="TEMPLATE_CONTACT_LIST_NO_ITEM" type="text/template"><div class="MdCMN12Zero MdCMN00Zero">
+            <div class="mdCMN12Img"><img src="/res/img/common/img_zero_01.png" width="" height="" alt=""></div>
+            <p class="mdCMN12Desc"><%= EMPTY_FRIENDLIST %></p>
+
+            <div class="MdCMN10BtnSet">
+                <button type="button" class="MdBtn03D01" id="contact_add_friends"><%= BUDDY_MENU_ADDBUDDY %></button>
+            </div>
+        </div></script><script id="TEMPLATE_CONTACT_LIST_NO_SELECTABLE_ITEM" type="text/template"><div class="MdCMN12Zero MdCMN00Zero">
+            <div class="mdCMN12Img"><img src="/res/img/common/img_zero_01.png" width="" height="" alt=""></div>
+            <p class="mdCMN12Desc"><%= BUDDY_GROUP_NOBUDDYTOSELECT %></p>
+
+            <div class="MdCMN10BtnSet">
+                <button type="button" class="MdBtn03D01" id="contact_add_friends"><%= BUDDY_MENU_ADDBUDDY %></button>
+            </div>
+        </div></script><script id="TEMPLATE_CHAT_LIST_STRUCTURE" type="text/template"><div id="_search" class="MdLFT01Search">
+            <div class="mdLFT01Inner">
+                <input type="text" id="_search_input" class="mdLFT01Input" placeholder="<%=SEARCH_CHATLIST_HINT%>" value="">
+                <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+            </div>
+            <button id="_chat_chatmenu" type="button" class="MdBtn01More">More</button>
+        </div>
+        <div id="_chat_list_scroll" class="MdScroll mdScroll01" style="height: 467px;">
+            <h1 class="MdHide">Chats List</h1>
+            <ul id="_chat_list_body" class="MdCMN03List ExHover">
+            </ul>
+        </div></script><script id="TEMPLATE_CHAT_LIST_ITEM" type="text/template"><div class="MdCMN04Item chatList" data-chatId="{{chatId}}">
+            <div class="pin">Fixed top</div>
+            <div class="mdCMN04Img {{#isMultiThumbnail}}mdCMN04ImgT{{thumbnailCount}}{{/isMultiThumbnail}}">
+                {{#thumbnailList}}
+                <div class="{{#isMultiThumbnail}}mdCMN04ImgInner{{/isMultiThumbnail}}">
+                    <img data-picture-path="{{picturePath}}" src="{{defaultPath}}" width="46" height="46" alt="">
+                </div>
+                {{/thumbnailList}}
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{displayName}}</span>
+                    <span class="mdCMN04Count {{^memberCount}}MdNonDisp{{/memberCount}}">({{memberCount}})</span>
+                    <span class="MdIcoMute01 {{^notificationOff}}MdNonDisp{{/notificationOff}}">Notifications Off</span>
+                </div>
+                <p class="mdCMN04Desc">{{lastMessage}}</p>
+            </div>
+            <div class="mdCMN04Opt">
+                <div class="mdCMN04Date">
+                    <time>{{date}}</time>
+                </div>
+                <div class="MdIcoBadge01 {{^unreadCount}}MdNonDisp{{/unreadCount}}">{{unreadCount}}</div>
+            </div>
+        </div></script><script id="TEMPLATE_SEARCH_CONTACT_NO_RESULT" type="text/template"><p class="MdTxtCaution02"><%= SEARCH_NORESULT %></p></script><script id="TEMPLATE_CHAT_LIST_NO_ITEM" type="text/template"><div class="MdCMN12Zero MdCMN00Zero">
+            <div class="mdCMN12Img"><img src="res/img/common/img_zero_02.png"></div>
+            <p class="mdCMN12Desc"><%=EMPTY_CHATLIST%></p>
+            <div class="MdCMN10BtnSet">
+                <button id="chat_start_chat" type="button" class="MdBtn03D01"><%=GNB_MENU_STARTTALK%></button>
+            </div>
+        </div></script><script id="TEMPLATE_CHAT_LIST_SEARCH_NO_ITEM" type="text/template"><p class="MdTxtCaution02"><%= SEARCH_NORESULT %></p></script><script id="TEMPLATE_FORWARD_CHAT_NO_ITEM" type="text/template"><p class="MdTxtCaution02"><%=EMPTY_SHARE_WITH_CHAT%></p></script><script id="TEMPLATE_FORWARD_GROUP_NO_ITEM" type="text/template"><p class="MdTxtCaution02"><%=EMPTY_SHARE_WITH_GROUP%></p></script><script id="TEMPLATE_FORWARD_CONTACT_NO_ITEM" type="text/template"><p class="MdTxtCaution02"><%=EMPTY_SHARE_WITH_BUDDY%></p></script><script id="TEMPLATE_INVITE_GROUP_INFO_STRUCTURE" type="text/template"><button type="button" class="MdBtn01Close02">Close</button>
+        <h1 class="MdHide">Edit</h1>
+
+        <div class="MdBox04">
+            <div class="MdCMN09ImgEdit mdCMN09ImgT1">
+                <div class="mdCMN09ImgInner">
+                    <img data-picture-path="{{groupInfo.picturePath}}" src="{{thumbnailImage}}" width="111" height="111" alt="{{placeHolderDisplayName}}">
+                </div>
+            </div>
+            <div class="MdRGT11Head">
+                <div class="mdRGT11Ttl">{{groupInfo.name}}</div>
+            </div>
+
+            <div class="MdRGT12List">
+                <ul class="">
+                    <li><a href="#" class="MdTxtAdd01 _joinBtn"><%= BUDDY_GROUP_JOIN %></a></li>
+                    <li><a href="#" class="_declineBtn"><%= BUDDY_GROUP_REJECTGROUP %></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="MdScroll mdScroll02">
+            <div class="MdRGT13List">
+                <div class="mdRGT13Nav">
+                    <button type="button" class="{{#selectJoinedMemeberList}}ExSelected{{/selectJoinedMemeberList}} _joinedMemeberBtn"><%= BUDDY_GROUP_MEMBER %> ({{joinedMemberCount}})</button>
+                    <button type="button" class="{{#selectInviteeMemeberList}}ExSelected{{/selectInviteeMemeberList}} _pendingMemeberBtn"><%= BUDDY_GROUP_INVITEE %> ({{pendingMemberCount}})</button>
+                </div>
+                <ul class="mdRGT13Ul"></ul>
+            </div>
+        </div></script><script id="TEMPLATE_GROUP_EMPTY_VIEW" type="text/template"><div class="MdCMN12Zero MdCMN00Zero">
+            <div class="mdCMN12Img"><img src="/res/img/common/img_zero_03.png" width="" height="" alt=""></div>
+            <p class="mdCMN12Desc">How to enjoy Groups</p>
+
+            <div class="MdCMN10BtnSet">
+                <button type="button" class="MdBtn03D01">Add Friends</button>
+            </div>
+
+        </div></script><script id="TEMPLATE_GROUP_INFO_STRUCTURE" type="text/template"><button type="button" class="MdBtn01Close02"><%= COMMON_CLOSE %></button>
+        <h1 class="MdHide"><%= BUDDY_GROUP_EDIT %></h1>
+        <div class="MdBox04">
+            <div class="MdCMN09ImgEdit">
+                <input type="file" accept="image/x-png, image/gif, image/jpeg" class="mdCMN09ImgInput" style="background-image: url({{thumbnailImage}})" data-picture-path="{{groupInfo.picturePath}}"
+                       title="<%= BUDDY_GROUP_EDIT %>">
+                <input type="file" accept="image/x-png, image/gif, image/jpeg" class="MdIcoEdit01" title="<%= BUDDY_GROUP_EDIT %>">
+            </div>
+            <div class="MdRGT11Head">
+                <a class="mdRGT11Ttl">{{groupInfo.name}}</a>
+                <button type="button" class="MdBtn01Edit01" title="<%= BUDDY_GROUP_EDIT %>">Edit</button>
+                <div contenteditable="true" class="mdRGT11Ttl MdNonDisp" id="info_groupNameInput" placeholder="{{placeholderDisplayName}}">{{groupInfo.name}}</div>
+                <span class="mdRGT11TtlCount MdNonDisp">20/20</span>
+                <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+                <button type="button" id="notiSettingBtn" class="{{#notification}}MdBtn01AlertsOn{{/notification}}{{^notification}}MdBtn01AlertsOff{{/notification}}"
+                        title="{{#notification}}<%= BUDDY_MENU_ALARMOFF %>{{/notification}}{{^notification}}<%= BUDDY_MENU_ALARMON %>{{/notification}}">Notification Toggle Button
+                </button>
+            </div>
+
+            <div class="MdRGT12List">
+                <ul class="">
+                    <li><a href="#" id="inviteGroup"><%= BUDDY_GROUP_INVITE_TITLE %></a></li>
+                    <li><a href="#" id="leaveGroup"><%= BUDDY_GROUP_LEAVE %></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="MdScroll mdScroll02">
+            <div class="MdRGT13List">
+                <div class="mdRGT13Nav">
+                    <button type="button" class="{{#selectJoinedMemeberList}}ExSelected{{/selectJoinedMemeberList}} _joinedMemeberBtn"><%= BUDDY_GROUP_MEMBER %> ({{joinedMemberCount}})</button>
+                    <button type="button" class="{{#selectInviteeMemeberList}}ExSelected{{/selectInviteeMemeberList}} _invitedMemeberBtn"><%= BUDDY_GROUP_INVITEE %> ({{invitedMemberCount}})</button>
+                </div>
+                <ul class="mdRGT13Ul"></ul>
+            </div>
+        </div></script><script id="TEMPLATE_GROUP_INFO_MEMBER_ITEM" type="text/template"><div class="mdRGT13Img"><img src="{{profileUrl}}" alt="{{placeHolderDisplayName}}" width="35" height="35"></div>
+        <div class="mdRGT13Ttl">{{displayName}}</div>
+        {{#enableDelete}}
+        <button type="button" class="MdBtn01Delete02" data-mid="{{mid}}"><%= COMMON_DEL %></button>
+        {{/enableDelete}}</script><script id="TEMPLATE_FAVORITE_GROUP_LIST" type="text/template"><div class="MdLFT04Head"><h2 class="mdLFT04Ttl"><%= LIST_LABEL_FAVORITE_TITLE %></h2></div>
+        <ul id="favorite_group_list_body" class="MdCMN03List ExHover">
+        </ul></script><script id="TEMPLATE_INVITED_GROUP_LIST" type="text/template"><div class="MdLFT04Head"><h2 class="mdLFT04Ttl"><%= BUDDY_GROUP_INVITE_TITLE %></h2></div>
+        <ul id="invited_group_list_body" class="MdCMN03List ExHover"></ul></script><script id="TEMPLATE_JOINED_GROUP_LIST" type="text/template"><div class="MdLFT04Head"><h2 class="mdLFT04Ttl"><%= LIST_LABEL_GROUPS_TITLE %></h2></div>
+        <ul id="joined_group_list_body" class="MdCMN03List ExHover"></ul></script><script id="TEMPLATE_GROUP_LIST_STRUCTURE" type="text/template"><div class="MdLFT01Search">
+            <div class="mdLFT01Inner">
+                <input type="text" class="mdLFT01Input" placeholder="<%= SEARCH_GROUPLIST_HINT %>" value="" id="select_group_search_input">
+                <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+            </div>
+            <button id="group_chatmenu" type="button" class="MdBtn01More"><%= CHAT_MSG_TEXT_SEEALL %></button>
+        </div>
+
+        <div class="MdScroll mdScroll01" style="height: 467px;">
+            <h1 class="MdHide"><%= LIST_LABEL_GROUPS_TITLE %></h1>
+            <section id="favoriteGroup"></section>
+            <section id="invitedGroup"></section>
+            <section id="joinedGroup"></section>
+        </div>
+        <p class="MdTxtCaution02" id="groupNoResult"><%= SEARCH_NORESULT %></p>
+        <div class="MdCMN12Zero MdCMN00Zero MdNonDisp" id="groupEmpty">
+            <div class="mdCMN12Img"><img src="/res/img/common/img_zero_03.png" width="" height="" alt=""></div>
+            <p class="mdCMN12Desc"><%= EMPTY_GROUPLIST %></p>
+
+            <div class="MdCMN10BtnSet">
+                <button type="button" class="MdBtn03D01"><%= GNB_MENU_CREATEGROUP %></button>
+            </div>
+
+        </div></script><script id="TEMPLATE_GROUP_LIST_ITEM" type="text/template"><div class="MdCMN04Item">
+            <div class="mdCMN04Img" title="{{placeHolderDisplayName}}">
+                <img data-picture-path="{{thumbnailList.picturePath}}" src="{{thumbnailList.defaultPath}}" width="46" height="46" alt="{{placeHolderDisplayName}}">
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{displayName}}</span>
+                </div>
+                <p class="mdCMN04Desc">{{memberCount}} members</p>
+            </div>
+        </div></script><script id="TEMPLATE_CREATE_GROUP_RIGHT_STRUCTURE" type="text/template"><h1 class="MdHide"><%= BUDDY_GROUP_CREATE_TITLE %></h1>
+
+        <div class="MdBox03">
+            <section class="mdBox03Cont01">
+                <h2 class="MdHide"><%= BUDDY_MENU_TITLE %></h2>
+
+                <div class="MdCMN09ImgEdit">
+                    <input type="file" class="mdCMN09ImgInput" accept="image/x-png, image/gif, image/jpeg"
+                           title="<%= BUDDY_GROUP_EDIT %>" alt="" style=""/>
+                    <input type="file" class="MdIcoEdit01" accept="image/x-png, image/gif, image/jpeg"
+                           title="<%=BUDDY_GROUP_EDIT %>" alt=""/>
+                </div>
+
+                <div class="MdRGT11Head ExEdit">
+                    <div class="mdRGT06Input single-line" id="groupNameInput" contenteditable="true" placeholder=""></div>
+                    <span class="mdRGT11TtlCount"></span>
+                    <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+                </div>
+            </section>
+
+            <section class="mdBox03Cont02">
+                <h2 class="MdHide"><%= BUDDY_GROUP_MEMBER %></h2>
+
+                <div class="MdScroll mdScroll02" style="height: 210px; margin: 12px 0 22px;">
+                </div>
+            </section>
+
+            <section class="mdBox03Cont03 MdNonDisp">
+              <div class="MdTxtDesc03"><%= CHROME_GROUP_DESC_ONLYREQUIRE %></div>
+            </section>
+
+            <div class="MdCMN10BtnSet mdCMN10TypeH01">
+                <button type="button" class="MdBtn03D01"><%= COMMON_CREATE %></button>
+                <button type="button" class="MdBtn03D03" id="createGroupCancelBtn"><%= COMMON_CANCEL %></button>
+            </div>
+        </div></script><script id="TEMPLATE_CREATE_GROUP_MEMEBER_ITEM" type="text/template"><div class="mdCMN08Img">
+            <img height="35" width="35" src="{{profileUrl}}" data-picture-path="{{picturePath}}" alt="{{placeholderDisplayName}}"></div>
+        <div class="mdCMN08Ttl">{{printName}}</div>
+        <button type="button" data-mid="{{mid}}" class="MdBtn01Delete02"><%= COMMON_DEL %></button></script><script id="TEMPLATE_CHAT_MINI_ROOM_STRUCTURE" type="text/template"><div id="_mini_chat_message_area" class="MdScroll mdScroll01" style="height: 90px;">
+        </div>
+        <div id="_mini_chat_bottom_form_area">
+        </div></script><script id="TEMPLATE_CHAT_MINI_MESSAGE_AREA" type="text/template"><a href="#" class="mdRGT05Msg">{{text}}</a></script><script id="TEMPLATE_CHAT_MINI_BOTTOM_FORM" type="text/template"></script><script id="TEMPLATE_FORWARD_LAYOUT_VIEW" type="text/template"><div id="_wrap_forward_tab" class="MdLFT01Tab mdFx">
+            <button type="button" name="CONTACT" class="mdFxAuto on"><%=GNB_MENU_BUDDYLIST%></button>
+            <button type="button" name="GROUP" class="mdFxAuto"><%=GNB_MENU_GROUP%></button>
+            <button type="button" name="CHAT" class="mdFxAuto"><%=GNB_LABEL_CHAT%></button>
+        </div>
+        <div id="_wrap_forward_list_area">
+            <div id="_forward_contact_list_area"></div>
+            <div id="_forward_group_list_area"></div>
+            <div id="_forward_chat_list_area"></div>
+        </div>
+        <div class="MdCMN10BtnSet mdCMN10TypeH02">
+            <button type="button" class="MdBtn03D01" disabled id="_forward_button"><%= COMMON_FORWARD %></button>
+            <button type="button" class="MdBtn03D02" id="_forward_cancel_button"><%= COMMON_CANCEL %></button>
+        </div></script><script id="TEMPLATE_FORWARD_COMPOSITE_VIEW" type="text/template"><div id="_wrap_forward_search" class="MdLFT01Search">
+            <div class="mdLFT01Inner">
+                <input type="text" class="mdLFT01Input" id="search_input" placeholder="<%= SEARCH_FRINEDLIST_HINT %>" value="">
+                <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+            </div>
+        </div>
+        <div class="_forward_scroll MdScroll mdScroll01">
+            <ul class="MdCMN03List ExHover">
+            </ul>
+        </div></script><script id="TEMPLATE_FORWARD_ITEM_VIEW" type="text/template"><div class="MdCMN04Item">
+            <div class="pin">Fixed top</div>
+            <div class="mdCMN04Img {{#isMultiThumbnail}}mdCMN04ImgT{{thumbnailCount}}{{/isMultiThumbnail}}">
+                {{#thumbnailList}}
+                <div class="{{#isMultiThumbnail}}mdCMN04ImgInner{{/isMultiThumbnail}}">
+                    <img data-picture-path="{{picturePath}}" src="{{defaultPath}}" width="46" height="46" alt="">
+                </div>
+                {{/thumbnailList}}
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{displayName}}</span>
+                </div>
+                <p class="mdCMN04Desc">{{lastMessage}}</p>
+            </div>
+            <div class="mdCMN04Opt">
+                <div class="MdRadio01"><input type="radio" name="_forward_contact_radio"></div>
+            </div>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_STRUCTURE" type="text/template"><div id="_chat_main_area" class="MdRGT02Set mdRGT02Chat">
+            <div id="_chat_welcome_area"></div>
+            <div id="_chat_header_area"></div>
+            <div id="_chat_dropzone" class="MdNonDisp" contenteditable="true" style="z-index:9999;position: absolute;top: 0;left: 0;width: 100%;height: 100%;font-size:0px;"></div>
+            <div class="mdRGT02Main MdScroll mdScroll02" id="_chat_message_area" style="height:100%"></div>
+            <div class="mdRGT02Btm">
+                <div id="_chat_bottom_new_message_area"></div>
+                <div id="_chat_bottom_sticker_area"></div>
+                <div id="_chat_bottom_form_area"></div>
+            </div>
+        </div>
+        <div class="MdRGT02Set" id="_chat_detail_area" style="max-width:0px;min-width:0px;-webkit-transform: translate3d(0,0,0)">
+        </div></script><script id="TEMPLATE_CHAT_CARD_WRAP" type="text/template"><div class="MdBoxCard MdNonDisp" id="_chat_card_area"></div></script><script id="TEMPLATE_CHAT_CARD_LAYOUT" type="text/template"><h2 class="blind">Card</h2>
+        <div class="MdBoxCardHead">
+            <h3><%= CHAT_LABLE_CARD_SELECT %></h3>
+            <button type="button" class="back _back"><%= CHAT_LABLE_CARD_ENTER %></button>
+        </div>
+        <div class="MdBoxCardCont" id="_chat_card_detail">
+            <div class="MdBoxCardType MdScroll mdScroll02" id="_chat_card_detail_list"></div>
+            <div class="MdBoxCardEdit" id="_chat_card_detail_edit"></div>
+            <button type="button" class="MdBtn01Close02 _close">Close</button>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_BOTTOM_NEW_MESSAGE" type="text/template"><a href="#"><b>{{displayName}}</b><span> : {{text}}</span></a></script><script id="TEMPLATE_CHAT_ROOM_BOTTOM_FORM" type="text/template"><div class="mdRGT06Unblock MdNonDisp" id="_chat_room_input_unblock_area">
+            <p><%=CHAT_STATUS_BLOCK%></p>
+            <p><a href="#" class="MdTxtLink01" id="_chat_room_input_unblock_button"><%=BUDDY_MENU_UNBLOCKBUDDY%></a></p>
+        </div>
+        <div id="chat_room_input_scroll" class="MdScroll mdScroll01">
+            <div class="mdRGT06Input" id="_chat_room_input" contenteditable="true" placeholder="<%=CHAT_MSG_ENTER%>"></div>
+        </div>
+        <div class="mdRGT06Btn">
+            <button type="button" id="_chat_room_sticker" class="MdBtn01Sticker" title="<%=CHAT_BTN_STICKER%>"><%=CHAT_BTN_STICKER%></button>
+            <button type="button" id="_chat_room_plus_btn" class="MdBtn01File" title="<%=CHAT_BTN_FILE%>"><%=CHAT_BTN_FILE%></button>
+            <button type="button" id="_chat_room_capture_btn" class="MdBtn01Capture" title="<%=GNB_LABEL_CAPTURE%>"><%=GNB_LABEL_CAPTURE%></button>
+        </div>
+        <div class="mdRGT06Unblock MdNonDisp" id="_chat_room_input_e2ee_area">
+            <p style="height:33px;"><%=CHAT_E2EE_BLOCK%></p>
+        </div></script><script id="TEMPLATE_STICKER_STRUCTURE" type="text/template"><p id="_sticker_all_download_area" class="MdRGT10Notice mdRGT10Down MdNonDisp">
+            <a id="_sticker_all_download" href="#" class=""><%= CHAT_STICKER_DOWNLOADALL_DESC %></a>
+            <button id="_sticker_all_download_cancel" type="button" class="MdBtn01Close"><%= COMMON_CLOSE %></button>
+        </p>
+        <div class="mdRGT09Resize"></div>
+        <div id="_sticker_tab_area"></div>
+        <div id="_sticker_list_area" class="MdScroll mdScroll02" style="position:relative;;background-color: #f8f8fa;"></div></script><script id="TEMPLATE_STICKER_TAB_STRUCTURE" type="text/template"><div class="MdScroll mdScroll02" style="height:50px;background-color: white;position:initial">
+            <ul id="_chat_sticker_tab" class="mdRGT09Ul">
+            </ul>
+        </div>
+        <button id="_chat_sticker_tab_toggle" type="button" class="mdRGT09Btn"><%= COMMON_OPEN %></button></script><script id="TEMPLATE_STICKER_LIST_STRUCTURE" type="text/template"><div id="_chat_sticker_progress_area" class="MdCMN07Caution MdNonDisp">
+            <div class="MdCMN11Progress mdCMN11Radial">
+                <div id="_chat_sticker_progress_chart" class="mdCMN11Meter mdCMN11P0"><span id="_chat_sticker_progress_text" class="mdCMN11Value">0%</span></div>
+            </div>
+            <p class="mdCMN07Desc"><%=CHAT_STICKER_DOWNLOADALL_DOWNLOADING%></p>
+        </div>
+        <ul id="_chat_sticker_list" class="mdRGT09List">
+        </ul></script><script id="TEMPLATE_STICKER_LIST_EXPIRED" type="text/template"><p class="mdCMN07Desc"><%=CHAT_STICKER_MSG_DESC_EXPIRED%></p>
+        <div class="mdCMN07Btn">
+            <button id="_sticker_expired_btn" type="button" class="MdBtn03D03 mdBtn03S"><%=COMMON_DEL%></button>
+        </div></script><script id="TEMPLATE_STICKER_LIST_NO_ITEM" type="text/template"><p id="_chat_sticker_no_item" class="mdCMN07Desc MdNonDisp"><%= CHAT_STICKER_RECENTSTICKERDESC1 %><br><%= CHAT_STICKER_RECENTSTICKERDESC2 %></p></script><script id="TEMPLATE_STICKER_TAB_ITEM" type="text/template"><button type="button"><img data-sticker-pkg-id="{{packageId}}" src="{{src}}" alt="" width="44"></button></script><script id="TEMPLATE_STICKER_LIST_ITEM" type="text/template"><img src="{{src}}" style="visibility: hidden"></script><script id="TEMPLATE_WELCOME" type="text/template"><div id="chat_room_start_chat" class="MdCMN12Zero mdCMN12Type01 MdNonDisp">
+            <div class="mdCMN12Img" style="margin-left : 4px;">
+                <img src="/res/img/common/img_zero_chat_room.png">
+            </div>
+            <p class="mdCMN12Desc" style="margin-left : 12px;"><%=EMPTY_CHATROOM%></p>
+        </div>
+
+        <div id="chat_room_welcome" class="MdCMN12Zero mdCMN12Type01 MdNonDisp">
+            <div class="mdCMN12Img"><img src="/res/img/common/img_zero_welcome.png">
+            </div>
+            <p class="mdCMN12Ttl"><%=EMPTY_WELCOME2%></p>
+            <p class="mdCMN12Desc"><%=EMPTY_WELCOME1%></p>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_HEADER" type="text/template"><div class="mdRGT04Img mdRGT04ImgT{{thumbnailCount}}">
+            {{#thumbnailList}}
+            <div class="mdRGT04ImgInner">
+                <img data-picture-path="{{picturePath}}" src="{{defaultPath}}" width="35" height="35" alt="">
+            </div>
+            {{/thumbnailList}}
+        </div>
+        <div class="mdRGT04Txt">
+            <h1 class="mdRGT04Ttl">{{displayName}}</h1>
+            {{#_memberCount}}<span class="mdRGT04Count">({{_memberCount}})</span>{{/_memberCount}}
+            {{^notification}}<span class="MdIcoMute01"><%= BUDDY_MENU_ALARMOFF %></span>{{/notification}}
+        </div>
+        <div id="_chat_header_contact_status_area" class="MdCMN10BtnSet mdCMN10TypeH01">
+            {{^_isUnregister}}
+            {{#_isNotFriend}}
+            {{#_isBlock}}
+            <button id="_chat_header_unblock_btn" type="button" class="MdBtn03D02 mdBtn03S"><%= BUDDY_MENU_UNBLOCKBUDDY %></button>
+            <button id="_chat_header_add_btn" type="button" class="MdBtn03D01 mdBtn03S"><%= COMMON_ADD %></button>
+            {{/_isBlock}}
+            {{^_isBlock}}
+            <button id="_chat_header_block_btn" type="button" class="MdBtn03D02 mdBtn03S"><%= BUDDY_MENU_BLOCKBUDDY %></button>
+            <button id="_chat_header_add_btn" type="button" class="MdBtn03D01 mdBtn03S"><%= COMMON_ADD %></button>
+            {{/_isBlock}}
+            {{/_isNotFriend}}
+            {{/_isUnregister}}
+        </div>
+        <div class="MdIcoSubmenu01">
+            <button type="button" id="_chat_moremenu" class="MdBtn01More">More</button>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_MESSAGE_AREA" type="text/template"><div id="_chat_room_msg_list" class="MdMN11ChatCnt">
+            <p class="MdRGT10Notice mdRGT10Prev MdNonDisp" id="_prev_msg_btn"><a href="#"><%=CHAT_MSG_SHOWPREV%></a></p>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_TEXT_MESSAGE" type="text/template">{{#isLinkable}}
+        <div class="mdRGT07LinkType loading">
+            <div class="linkView">
+                <div class="thumb">
+                    <img src="" alt="">
+                </div>
+                <div class="detail">
+                    <div class="title"></div>
+                    <div class="des"></div>
+                </div>
+            </div>
+        </div>
+        {{/isLinkable}}
+
+        {{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Text">
+                <div class="mdRGT07MsgText">
+                    <span class="mdRGT07MsgTextInner">{{CT_text}}</span>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                    {{#CT_E2EE_VERSION}}
+                    <p class="">[E2EE v{{CT_E2EE_VERSION}}]</p>
+                    {{/CT_E2EE_VERSION}}
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}
+
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Text">
+                <div class="mdRGT07MsgText">
+                    <span class="mdRGT07MsgTextInner">{{CT_text}}</span>
+                </div>
+                <div class="mdRGT07Opt">
+                    <button type="button" id="_chat_message_file_failure" class="MdBtn01Failure {{#isShowDeleteButton}}MdNonDisp{{/isShowDeleteButton}}" sylte="cursor:auto;"></button>
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date">
+                        <time class="{{^CT_isSent}}MdNonDisp{{/CT_isSent}}">{{CT_date}}</time>
+                    </p>
+                    {{#CT_E2EE_VERSION}}
+                    <p class="">[E2EE v{{CT_E2EE_VERSION}}]</p>
+                    {{/CT_E2EE_VERSION}}
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                <button type="button" class="{{#isShowDeleteButton}}MdNonDisp{{/isShowDeleteButton}}" id="_chat_message_delete"><%= COMMON_DEL %></button>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_STICKER_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Sticker">
+                <div class="mdRGT07MsgText mdRGT07Loading">
+                </div>
+                <div class="mdRGT07MsgImg MdNonDisp">
+                    <img id="_sticker_img" data-content-type="{{message.contentType}}" src="/res/img/noimg/img_error_Image_Other.png" alt="{{stickerTxt}}">
+                </div>
+
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Sticker">
+                <div class="mdRGT07MsgText mdRGT07Loading">
+                </div>
+                <div class="mdRGT07MsgImg MdNonDisp">
+                    <img id="_sticker_img" data-content-type="{{message.contentType}}" src="/res/img/noimg/img_error_Image_Own.png" alt="{{stickerTxt}}" style="min-width:67px;min-height:66px;"
+                         width="{{width}}" height="{{height}}">
+                </div>
+
+                <div class="mdRGT07Opt">
+                    <button type="button" id="_chat_message_file_failure" class="MdBtn01Failure {{#isShowDeleteButton}}MdNonDisp{{/isShowDeleteButton}}" sylte="cursor:auto;"></button>
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date">
+                        <time class="{{^CT_isSent}}MdNonDisp{{/CT_isSent}}">{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                <button type="button" class="{{#isShowDeleteButton}}MdNonDisp{{/isShowDeleteButton}}" id="_chat_message_delete"><%= COMMON_DEL %></button>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_MUSIC_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Music">
+                <div class="mdRGT07MsgText">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="thumb"><img class="music_thumbnail" src="/res/img/noimg/img_Link_Other_70x70.png" width="71" height="71" alt=""></div>
+                        </div>
+                        <div class="textView">
+                            <span class="titleService">LINE MUSIC</span>
+                            <span class="detail">
+                                <span class="text">{{mainTitle}}</span>
+                            </span>
+                            <span class="des">{{subTitle}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Music">
+                <div class="mdRGT07MsgText ">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="thumb"><img class="music_thumbnail" src="/res/img/noimg/img_Link_Own_70x70.png" width="71" height="71" alt=""></div>
+                        </div>
+                        <div class="textView">
+                            <span class="titleService">LINE MUSIC</span>
+                            <span class="detail">
+                                <span class="text">{{mainTitle}}</span>
+                            </span>
+                            <span class="des">{{subTitle}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date">
+                        <time class="{{^CT_isSent}}MdNonDisp{{/CT_isSent}}">{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_LINK_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        {{/CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07CP">
+                <div class="mdRGT07MsgText  ">
+                    <div class="infoCp">
+                        <div class="icon"><img src="/res/img/noimg/img_Link_Other_70x70.png" width="58" height="58" alt="" class="thumb _link_thumbnail"></div>
+                        <div class="textView">
+                            <div class="detail">
+                                <p class="tit">{{&CT_mainTitle}}</p>
+                                {{CT_subText}}
+                            </div>
+                        </div>
+                    </div>
+                    {{#CT_isAvailableLink}}
+                    <a href="#" class="mdRGT07MsgTextCPunder _linkmessage_link">{{CT_linkText}}</a>
+                    {{/CT_isAvailableLink}}
+                    {{^CT_isAvailableLink}}
+                    <span class="mdRGT07MsgTextCPunder"><%= CHAT_MSG_RECEIVED_UNKNOWN  %></span>
+                    {{/CT_isAvailableLink}}
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                    <!--/mdRGT07Opt--></div>
+                <!--/mdRGT07Msg--></div>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_NOTIFICATION_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        {{/CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07CP">
+                <div class="mdRGT07MsgText  ">
+                    <div class="infoCp">
+                        <div class="icon"><img src="/res/img/noimg/img_Link_Other_70x70.png" width="58" height="58" alt="" class="thumb _link_thumbnail"></div>
+                        <div class="textView">
+                            <div class="detail">
+                                <p class="tit">{{&CT_mainTitle}}</p>
+                                {{CT_subText}}
+                            </div>
+                        </div>
+                    </div>
+                    {{#CT_isAvailableLink}}
+                    <a href="#" class="mdRGT07MsgTextCPunder _linkmessage_link">{{CT_linkText}}</a>
+                    {{/CT_isAvailableLink}}
+                    {{^CT_isAvailableLink}}
+                    <span class="mdRGT07MsgTextCPunder"><%= CHAT_MSG_RECEIVED_UNKNOWN  %></span>
+                    {{/CT_isAvailableLink}}
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                    <!--/mdRGT07Opt--></div>
+                <!--/mdRGT07Msg--></div>
+        </div></script><script id="TEMPLATE_CHAT_ROOM_GIFT_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Gift">
+                <div class="mdRGT07MsgImg">
+                    <img style="min-height:124px;" src="{{giftUrl}}">
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07MsgText">
+                <%=CHAT_MSG_STICKER_GIFT_FROM_BUDDY%>
+            </div>
+        </div>
+        {{/CT_isMine}}
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Gift">
+                <div class="mdRGT07MsgImg">
+                    <img style="min-height:124px;" src="{{giftUrl}}">
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07MsgText">
+                <%=CHAT_MSG_STICKER_GIFT_FROM_ME%>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_HTML_MESSAGE" type="text/template">{{^CT_isMine}}
+            <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+            <div class="mdRGT07Body">
+                <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+                <div class="mdRGT07Msg mdRGT07Poll">
+                    <div class="mdRGT07MsgText">
+                        <div class="thumbnail" style="background-image:url('{{htmlMsgData.img}}')"></div>
+                        <div class="mdRGT07MsgTextTitle">{{htmlMsgData.title}}</div>
+                        <a href="#" class="mdRGT07MsgTextCPunder"><%=CHAT_MSG_POLL_ACTION_BTN%></a>
+                    </div>
+                    <div class="mdRGT07Opt">
+                        <p class="mdRGT07Date">
+                            <time>{{CT_date}}</time>
+                        </p>
+                        </div>
+                    </div>
+            </div>
+        {{/CT_isMine}}
+
+        {{#CT_isMine}}
+            <div class="mdRGT07Body">
+                <div class="mdRGT07Msg mdRGT07Poll">
+                    <div class="mdRGT07MsgText">
+                        <div class="thumbnail" style="background-image:url('{{htmlMsgData.img}}')"></div>
+                        <div class="mdRGT07MsgTextTitle">{{htmlMsgData.title}}</div>
+                        <a href="#" class="mdRGT07MsgTextCPunder"><%=CHAT_MSG_POLL_ACTION_BTN%></a>
+                    </div>
+                    <div class="mdRGT07Opt">
+                        <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                        <p class="mdRGT07Date">
+                            <time class="{{^CT_isSent}}MdNonDisp{{/CT_isSent}}">{{CT_date}}</time>
+                        </p>
+                        </div>
+                    </div>
+            </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_IMAGE_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Image">
+                <div class="mdRGT07MsgText mdRGT07Loading"></div>
+                <div class="mdRGT07MsgImg MdNonDisp" id="_chat_message_loading_area">
+                    <img data-content-type="{{message.contentType}}" src="/res/img/noimg/img_error_File_Other.png" style="max-width:200px;max-height:200px">
+                    <button type="button" class="MdBtn01Cancel01 MdNonDisp"><%=COMMON_CANCEL%></button>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                <button type="button" id="_chat_message_image_forward"><%=COMMON_FORWARD%></button>
+                <button type="button" class="MdNonDisp" id="_chat_message_image_save"><%=COMMON_SAVE%></button>
+            </div>
+        </div>
+        {{/CT_isMine}}
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Image">
+                <div class="mdRGT07MsgText mdRGT07Loading"></div>
+                <div class="mdRGT07MsgImg MdNonDisp" id="_chat_message_loading_area">
+                    <img data-content-type="{{message.contentType}}" src="/res/img/noimg/img_error_File_Own.png" style="max-width:200px;max-height:200px">
+                    <button type="button" class="MdBtn01Cancel01 MdNonDisp"><%=COMMON_CANCEL%></button>
+                </div>
+                <div class="mdRGT07Opt">
+                    <button type="button" id="_chat_message_image_failure" class="MdBtn01Failure {{^CT_isFail}}MdNonDisp{{/CT_isFail}}">Failure</button>
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div id="_chat_message_success_menu" class="mdRGT07Btn MdNonDisp">
+                    <button type="button" id="_chat_message_image_forward"><%=COMMON_FORWARD%></button>
+                    <button type="button" id="_chat_message_image_save"><%=COMMON_SAVE%></button>
+                </div>
+                <div id="_chat_message_fail_menu" class="mdRGT07Btn MdNonDisp">
+                    <button type="button" id="_chat_message_image_retry"><%=CHAT_MSG_ETRY%></button>
+                    <button type="button" id="_chat_message_image_delete"><%= COMMON_DEL %></button>
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_AUDIO_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Voice">
+                <div class="mdRGT07MsgText mdRGT07VVoice loading"><!-- loading, play, pause, saved -->
+                    <span class="time">{{duration}}</span>
+                    <span class="state"><span class="bar" style="width:0%">0%</span></span>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time class="{{#CT_isFail}}MdNonDisp{{/CT_isFail}}">{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                <button type="button" id="_chat_message_audio_forward"><%=COMMON_FORWARD%></button>
+                <button type="button" class="_btn_audio_save">{{btn_save_title}}</button>
+            </div>
+        </div>
+        {{/CT_isMine}}
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Voice">
+                <div class="mdRGT07MsgText mdRGT07VVoice loading"><!-- loading, play, pause, saved -->
+                    <span class="time">{{duration}}</span>
+                    <span class="state"><span class="bar" style="width:0%">0%</span></span>
+                </div>
+                <div class="mdRGT07Opt">
+                    <button type="button" class="MdBtn01Failure MdNonDisp">Failure</button>
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date MdNonDisp">
+                        <time class="{{#CT_isFail}}MdNonDisp{{/CT_isFail}}">{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                <button type="button" id="_chat_message_audio_forward" class="MdNonDisp"><%=COMMON_FORWARD%></button>
+                <button type="button" class="_btn_audio_save MdNonDisp">{{btn_save_title}}</button>
+                <button type="button" class="_btn_audio_delete onlyOne MdNonDisp">{{btn_delete_title}}</button>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_VIDEO_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07ClipMin">
+                <div class="mdRGT07MsgText">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="icoView noThumb">
+                                <img src="{{thumbNail}}" width="68" height="68" alt="" data-content-type="{{message.contentType}}" class="MdNonDisp _thumb">
+                                <img src="/res/img/common/ico_mdRGT07Video_Other.png" width="" height="" alt="" class="_noThumb">
+                                <img src="/res/img/common/img_clip_play.png" width="36" height="36" alt="play" class="icoPlay">
+                            </div>
+                        </div>
+                        <div class="textView">
+                            <span class="detail">
+                                <span class="text"><%=CHAT_MSG_VIDEO_LABEL%></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                    <!--/mdRGT07Opt--></div>
+                <!--/mdRGT07Msg--></div>
+            <div class="mdRGT07Btn">
+                <button type="button" id="_chat_message_video_forward"><%=COMMON_FORWARD%></button>
+                <button type="button" class="_save"><%=COMMON_SAVE%></button>
+            </div>
+            <div class="MdCMN11Progress mdCMN11Bar MdNonDisp">
+                <span class="mdCMN11Meter"><span style="width: 0%">0%</span></span>
+                <span class="mdCMN11Value">0%</span>
+                <button type="button" class="mdCMN11Cancel">Cancel</button>
+                <!--/MdCMN11Progress--></div>
+        </div>
+
+        {{/CT_isMine}}
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07ClipMin">
+                <div class="mdRGT07MsgText"><!-- mdRGT07MsgText or mdRGT07MsgImg or mdRGT07MsgText mdRGT07Loading  -->
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="icoView noThumb">
+                                <img src="{{thumbNail}}" width="68" height="68" alt="" class="MdNonDisp _thumb" data-content-type="{{message.contentType}}">
+                                <img src="/res/img/common/ico_mdRGT07Video_Own.png" width="" height="" alt="" class="_noThumb">
+                                <img src="/res/img/common/img_clip_play.png" width="36" height="36" alt="play" class="icoPlay">
+                            </div>
+                        </div>
+                        <div class="textView">
+                            <span class="detail">
+                                <span class="text"><%=CHAT_MSG_VIDEO_LABEL%></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <button type="button" class="MdBtn01Failure MdNonDisp" sylte="cursor:auto;"></button>
+
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date MdNonDisp">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+                <!--/mdRGT07Msg--></div>
+            <div class="mdRGT07Btn">
+                {{#CT_isFail}}
+                <button type="button" class="_delete"><%= COMMON_DEL %></button>
+                {{/CT_isFail}}
+                {{#CT_isSent}}
+                <button type="button" id="_chat_message_video_forward"><%=COMMON_FORWARD%></button>
+                <button type="button" class="_save"><%=COMMON_SAVE%></button>
+                {{/CT_isSent}}
+            </div>
+            <div class="MdCMN11Progress mdCMN11Bar MdNonDisp">
+                <span class="mdCMN11Meter"><span style="width: 0%">0%</span></span>
+                <span class="mdCMN11Value">0%</span>
+                <button type="button" class="mdCMN11Cancel">Cancel</button>
+                <!--/MdCMN11Progress--></div>
+        </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_FILE_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07File">
+                <div class="mdRGT07MsgText" style="cursor:pointer">
+                    {{message.contentMetadata.FILE_NAME}}
+                    <div class="mdRGT07MsgOpt">
+                        <%=CHAT_MSG_FILE_EXT%> : {{fileExt}}<br>
+                        Size : {{fileSize}}<br>
+                        {{#fileUntil}}<%=CHAT_MSG_FILE_PERIOD%> {{fileUntil}}{{/fileUntil}}
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                <button type="button" id="_chat_message_file_forward"><%=COMMON_FORWARD%></button>
+                <button type="button" class="" id="_chat_message_file_save"><%=COMMON_SAVE%></button>
+            </div>
+            <div class="MdCMN11Progress mdCMN11Bar MdNonDisp">
+                <span class="mdCMN11Meter"><span style="width: 0%"></span></span>
+                <span class="mdCMN11Value">0%</span>
+                <button type="button" id="_chat_message_file_cancel" class="mdCMN11Cancel"><%=COMMON_CANCEL%></button>
+            </div>
+        </div>
+        {{/CT_isMine}}
+
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07File">
+                <div class="mdRGT07MsgText" style="cursor:pointer">
+                    {{message.contentMetadata.FILE_NAME}}
+                    <div class="mdRGT07MsgOpt">
+                        <%=CHAT_MSG_FILE_EXT%> : {{fileExt}}<br>
+                        Size : {{fileSize}}<br>
+                        {{#fileUntil}}<%=CHAT_MSG_FILE_PERIOD%>{{fileUntil}}{{/fileUntil}}
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <button type="button" id="_chat_message_file_failure" class="MdNonDisp MdBtn01Failure" sylte="cursor:auto;"></button>
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date MdNonDisp">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+            <div class="mdRGT07Btn">
+                {{#fileUntil}}
+                <button type="button" id="_chat_message_file_forward"><%=COMMON_FORWARD%></button>
+                <button type="button" id="_chat_message_file_save"><%=COMMON_SAVE%></button>
+                {{/fileUntil}}
+                <button type="button" class="MdNonDisp onlyOne" id="_chat_message_file_delete"><%= COMMON_DEL %></button>
+            </div>
+            <div class="MdCMN11Progress mdCMN11Bar MdNonDisp">
+                <span class="mdCMN11Meter"><span style="width: 0%"></span></span>
+                <span class="mdCMN11Value">0%</span>
+                <button type="button" id="_chat_message_file_cancel" class="mdCMN11Cancel"></button>
+            </div>
+        </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_CONTACT_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Contacts">
+                <div class="mdRGT07MsgText">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="thumb"><img src="{{share_contact_thumbnail}}" width="35" height="35" alt="{{displayContactName}}"></div>
+                        </div>
+                        <div class="textView">
+                            <div class="detail">
+                                <span class="text">{{displayContactName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}
+
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Contacts">
+                <div class="mdRGT07MsgText">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="thumb"><img src="{{share_contact_thumbnail}}" width="35" height="35" alt="{{displayContactName}}"></div>
+                        </div>
+                        <div class="textView">
+                            <div class="detail">
+                                <span class="text">{{displayContactName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date">
+                        <time class="{{^CT_isSent}}MdNonDisp{{/CT_isSent}}">{{CT_date}}</time>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_LOCATION_MESSAGE" type="text/template">{{^CT_isMine}}
+        <div class="mdRGT07Img"><img src="{{CT_thumbnail}}" width="35" height="35" alt=""></div>
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Ttl">{{CT_displayName}}</div>
+            <div class="mdRGT07Msg mdRGT07Location">
+                <div class="mdRGT07MsgText">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="thumb"><img src="/res/img/common/ico_location.png" width="20" height="24"></div>
+                        </div>
+                        <div class="textView">
+                            <div class="detail">
+                                <span class="text">{{addressTitle}} {{#addressText}}<br>{{addressText}}{{/addressText}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Date">
+                        <time>{{CT_date}}</time>
+                    </p>
+                    {{#CT_E2EE_VERSION}}
+                    <p class="">[E2EE v{{CT_E2EE_VERSION}}]</p>
+                    {{/CT_E2EE_VERSION}}
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}
+
+        {{#CT_isMine}}
+        <div class="mdRGT07Body">
+            <div class="mdRGT07Msg mdRGT07Location">
+                <div class="mdRGT07MsgText">
+                    <div class="infoBb">
+                        <div class="icon">
+                            <div class="thumb"><img src="/res/img/common/ico_location.png" width="20" height="24"></div>
+                        </div>
+                        <div class="textView">
+                            <div class="detail">
+                                <span class="text">{{addressTitle}} {{#addressText}}<br>{{addressText}}{{/addressText}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdRGT07Opt">
+                    <p class="mdRGT07Read {{^CT_read}}MdNonDisp{{/CT_read}}">{{CT_readText}}</p>
+                    <p class="mdRGT07Date">
+                        <time class="{{^CT_isSent}}MdNonDisp{{/CT_isSent}}">{{CT_date}}</time>
+                    </p>
+                    {{#CT_E2EE_VERSION}}
+                    <p class="">[E2EE v{{CT_E2EE_VERSION}}]</p>
+                    {{/CT_E2EE_VERSION}}
+                </div>
+            </div>
+        </div>
+        {{/CT_isMine}}</script><script id="TEMPLATE_CHAT_ROOM_DATE_MESSAGE" type="text/template"><time>{{date}}</time></script><script id="TEMPLATE_CHAT_ROOM_SYSTEM_MESSAGE" type="text/template"><time class="preline">{{sysMsgText}}</time></script><script id="TEMPLATE_CHAT_ROOM_WARNING_MESSAGE" type="text/template"><p class="mdRGT05Txt01">
+            {{#sysMsgText}}
+            {{.}}<br>
+            {{/sysMsgText}}
+        </p></script><script id="TEMPLATE_CHAT_CARD_LIST_ITEM" type="text/template"><img src="{{imgUrl}}" width="116" height="175" alt="{{name}}"></script><script id="TEMPLATE_CHAT_CARD_DETAIL_LIST" type="text/template"><ul class=""></ul></script><script id="TEMPLATE_CHAT_CARD_DETAIL_ITEM" type="text/template"><div class="cardViewSection original">
+
+        </div>
+        <div class="cardViewSection viewer">
+            <div class="cardView" id="cardTemplate">
+                <img src="{{imgUrl}}">
+                <div class="cardMessage" id="cardInputContainer" style="font-size:100%">
+                    <div class="enterTxt" id="enterText" contenteditable="true" spellcheck='false' placeholder="<%= CHAT_LABLE_CARD_GUIDETEXT %>"></div>
+                </div>
+            </div>
+            <div class="cardEdit">
+                <button type="button" class="boldType" id="boldBtn"></button><!-- boldTrue -->
+                <span class="control" id="card_font_size">
+                    <button type="button" class="reduce">Reduce font</button>
+                    <button type="button" class="raising">Raising font</button>
+                </span>
+                <button type="button" class="color" id="colorPicker">
+                    <span class="picker black"></span>
+                    <div class="palette">
+                        <ul>
+                            <li class="_defaultColor" data-color="#000" style="background-color: #000">default color</li>
+                            <li class="purple" data-color="#831ccf">purple</li>
+                            <li class="blue" data-color="#004fe9">blue</li>
+                            <li class="green" data-color="#00bc2c">green</li>
+                            <li class="white" data-color="#ffffff">white</li>
+                            <li class="black" data-color="#000000">black</li>
+                            <li class="pink" data-color="#db46a1">pink</li>
+                            <li class="sky" data-color="#00aed9">sky</li>
+                            <li class="yellow" data-color="#ffef00">yellow</li>
+                            <li class="orange" data-color="#ff9600">orange</li>
+                            <li class="red" data-color="#ff0000">red</li>
+                        </ul>
+                    </div>
+                </button>
+            </div>
+            <div class="cardBtn" id="sendCardBtn">
+                <button type="button" disabled="disabled"><%= COMMON_SEND %></button><!-- class="selected" : 버튼 활성화 -->
+            </div>
+        </div></script><script id="TEMPLATE_RECOMMEND_LAYOUT" type="text/template"><div class="MdLFT01Search _wrap_search">
+            <div class="mdLFT01Inner">
+                <input type="text" class="mdLFT01Input" placeholder="<%= SEARCH_ADDFRIEND_HINT %>" value="" id="recommend_search_input">
+                <button type="button" class="MdBtn01Delete01 _btn_input_clear MdNonDisp"><%= COMMON_DEL %></button>
+            </div>
+            <button type="button" id="_recommend_chatmenu" class="MdBtn01More">More</button>
+        </div>
+        <dl class="MdLFT02Id{{^userId}} MdNonDisp{{/userId}}" id="recommend_user_id">
+            <dt class="mdLFT02Dt"><%= SETTINGPROFILE_LABEL_USERID %></dt>
+            <dd class="mdLFT02Dd _user_id">{{userId}}</dd>
+        </dl>
+        <div class="MdLFT05Item MdCMN00Zero" id="recommend_searched_result" style="position:absolute;width:100%;left:-100%"></div>
+        <div class="MdScroll mdScroll01" style="height: 467px;" id="recommend_wrap_list">
+            <h1 class="MdHide"><%= GNB_MENU_BUDDYLIST %></h1>
+            <section id="recommend_wrap_contactlist"></section>
+        </div></script><script id="TEMPLATE_RECOMMEND_ITEM" type="text/template"><div class="MdCMN04Item">
+            <div class="mdCMN04Img">
+                <img src="{{profileUrl}}" width="46" height="46" alt="{{placeHolderDisplayName}}" class="_profile_img">
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{printName}}</span>
+                </div>
+                <p class="mdCMN04Desc">{{recommendReason}}</p>
+            </div>
+            <div class="mdCMN04Opt">
+                <button type="button" class="MdBtn01Add _recommend_contact" title="<%= BUDDY_MENU_ADDBUDDY%>"><%= GNB_MENU_ADDFRIEND %></button>
+            </div>
+        </div></script><script id="TEMPLATE_RECOMMEND_SEARCH_RESULT" type="text/template"><div id="recommend_search_result_view" class="MdNonDisp">
+            <div class="mdLFT05Img"><img src="{{profileUrl}}" width="110" height="110" alt=""></div>
+            {{#result_done}}
+            <h2 class="mdLFT05Ttl">{{displayName}}</h2>
+            <div class="MdCMN10BtnSet mdCMN10TypeH01">
+                <button type="button" class="MdBtn03D03" id="recommend_cancel_contact"><%= COMMON_CANCEL %></button>
+                <button type="button" class="MdBtn03D01" id="recommend_add_contact"><%= COMMON_ADD %></button>
+            </div>
+            {{/result_done}}
+            {{#result_alreay_freind_or_me}}
+            <h2 class="mdLFT05Ttl">{{displayName}}</h2>
+            <p class="mdLFT05Desc">{{message}}</p>
+            <div class="MdCMN10BtnSet mdCMN10TypeH01">
+                <button type="button" class="MdBtn03D03" id="recommend_search_result_cancel"><%= COMMON_CANCEL %></button>
+                <button type="button" class="MdBtn03D01" disabled><%= COMMON_ADD %></button>
+            </div>
+            {{/result_alreay_freind_or_me}}
+        </div>
+        </div></script><script id="TEMPLATE_RECOMMEND_SEARCH_RESULT_NOT_EXIST" type="text/template"><div class="MdCMN12Zero _recommend_wrap">
+            <div class="mdLFT05Img"><img src="/res/img/common/img_mdLFT05Error_404.png" width="110" height="110" alt=""></div>
+            <p class="mdLFT05Desc"><%= SEARCH_NORESULT_BUDDY %></p>
+
+            <div class="MdCMN10BtnSet mdCMN10TypeH01">
+                <button type="button" class="MdBtn03D01" id="recommend_search_no_result_close"><%= COMMON_OK %></button>
+            </div>
+        </div></script><script id="TEMPLATE_RECOMMEND_LIST_NO_ITEM" type="text/template"><div class="MdCMN12Zero _recommend_wrap">
+            <div class="mdCMN12Img"><img src="/res/img/common/img_zero_04.png" width="" height="" alt=""></div>
+            <p class="mdCMN12Desc"><%= EMPTY_ADDFRIENDS %></p>
+        </div></script><script id="TEMPLATE_SELECT_CONTACT_LAYOUT" type="text/template"><div class="MdLFT01Search">
+            <div class="mdLFT01Inner">
+                <input type="text" class="mdLFT01Input" placeholder="<%= SEARCH_FRINEDLIST_HINT %>" value="">
+                <button type="button" class="MdBtn01Delete01 MdNonDisp">Delete</button>
+            </div>
+        </div>
+
+
+        <div class="MdScroll mdScroll01" style="height: 467px;">
+            <h1 class="MdHide"><%= GNB_MENU_BUDDYLIST %></h1>
+            <ul class="MdCMN03List ExHover">
+
+            </ul>
+        </div></script><script id="TEMPLATE_SELECT_CONTACT_WITHBTN_LAYOUT" type="text/template"><div class="MdLFT01Search _wrap_search">
+            <div class="mdLFT01Inner">
+                <input type="text" class="mdLFT01Input" id="search_input" placeholder="<%= SEARCH_FRINEDLIST_HINT %>" value="">
+                <button type="button" class="MdBtn01Delete01 MdNonDisp"><%= COMMON_DEL %></button>
+            </div>
+        </div>
+
+
+        <div class="MdScroll mdScroll01" style="height: 467px;">
+            <h1 class="MdHide"><%= GNB_MENU_BUDDYLIST %></h1>
+            <ul class="MdCMN03List ExHover">
+
+
+            </ul>
+        </div>
+        <div class="MdCMN10BtnSet mdCMN10TypeH02">
+            <button type="button" class="MdBtn03D01" id="checked_count"><%= COMMON_INVITE %></button>
+            <button type="button" class="MdBtn03D02" id="selectable_contact_closeBtn"><%= COMMON_CANCEL %></button>
+        </div></script><script id="TEMPLATE_SELECT_CONTACT_ITEM" type="text/template"><div class="MdCMN04Item">
+            <div class="mdCMN04Img">
+                <img src="{{profileUrl}}" alt="{{placeholderDisplayName}}" width="46" height="46" class="_profile_img">
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{printName}}</span>
+                </div>
+            </div>
+            <div class="mdCMN04Opt">
+                <div class="MdCheckbox01"><input type="checkbox" class="_input_checkbox" value="{{mid}}" {{#selected}}checked{{/selected}}></div>
+            </div>
+        </div></script><script id="TEMPLATE_CONTACT_DETAIL_ITEM" type="text/template"><button type="button" class="MdBtn01Close02" data-click-name="close"><%= COMMON_CLOSE %></button>
+        <h1 class="MdHide"><%= BUDDY_MENU_PROFILE %></h1>
+
+        <div class="MdBox04 mdBox04Single">
+            <div class="MdCMN09ImgEdit mdCMN09ImgT1" {{^isProfileAnimation}}style="-webkit-animation: ''" {{/isProfileAnimation}}>
+            <div class="mdCMN09ImgInner MdCursorP">
+                <img data-click-name="change_profile" data-picture-path="{{picturePath}}" src="{{defaultPath}}" width="111" height="111" alt="">
+            </div>
+        </div>
+        <div id="_chat_contact_detail_edit" class="MdRGT11Head ExEdit MdNonDisp">
+            <div contenteditable="true" id="_chat_contact_detail_input" class="mdRGT11Ttl" placeholder="{{placeholderDisplayName}}">{{printName}}</div>
+            <span class="mdRGT11TtlCount">20/20</span>
+            <button data-click-name="delete_name" type="button" class="MdBtn01Delete01"><%= COMMON_DEL %></button>
+        </div>
+
+        <div id="_chat_contact_detail_view" class="MdRGT11Head">
+            {{^isDisabledEditName}}
+            <a href="#" class="mdRGT11Ttl" style="cursor:default">{{printName}}</a>
+            <button data-click-name="edit_name" type="button" class="MdBtn01Edit01" title="<%= BUDDY_GROUP_EDIT%>"><%= BUDDY_MENU_PROFILE %></button>
+            {{/isDisabledEditName}}
+            {{#isDisabledEditName}}
+            <p href="#" class="mdRGT11Ttl">{{printName}}</p>
+            {{/isDisabledEditName}}
+            {{#isShowNotification}}
+            {{#isNotification}}
+            <button type="button" data-click-name="notification_off" class="_notification_btn MdBtn01AlertsOn" title="<%= BUDDY_MENU_ALARMOFF %>">
+                {<%= BUDDY_MENU_ALARMON %>
+            </button>
+            {{/isNotification}}
+            {{^isNotification}}
+            <button type="button" data-click-name="notification_on" class="_notification_btn MdBtn01AlertsOff" title="<%= BUDDY_MENU_ALARMON %>">
+                <%= BUDDY_MENU_ALARMOFF %>
+            </button>
+            {{/isNotification}}
+            {{/isShowNotification}}
+        </div>
+        {{#isDisplayNameOverriden}}
+        <p class="MdTxtDesc02">{{originDisplayName}}</p>
+        {{/isDisplayNameOverriden}}
+        <p class="MdTxtDesc01">{{statusMessage}}</p>
+        <div class="MdRGT12List">
+            <ul class="">
+                {{#isMe}}
+                <li data-click-name="edit_profile"><a href="#"><%= BUDDY_MENU_PROFILE %></a></li>
+                {{/isMe}}
+
+                {{^isMe}}
+                {{#isChat}}
+                <li data-click-name="invite"><a href="#"><%= BUDDY_GROUP_INVITE_TITLE %></a></li>
+                <li data-click-name="chat"><a href="#"><%= BUDDY_MENU_CHAT %></a></li>
+                {{/isChat}}
+
+                {{#isAddFriend}}
+                <li data-click-name="add"><a href="#" class="MdTxtAdd01"><%= BUDDY_MENU_ADDBUDDY %></a></li>
+                {{/isAddFriend}}
+
+                {{#isShowFavorite}}
+                <li data-click-name="change_favorite">
+                    <label class="MdCheckbox01">
+                        <input type="checkbox" {{#isFavoriteContact}} checked=checked {{/isFavoriteContact}}> <%=BUDDY_MENU_ADDFAVORITE%></label>
+                </li>
+                {{/isShowFavorite}}
+
+                {{#isShowBlock}}
+                {{#isBlockOrDeleteBlock}}
+                <li data-click-name="unblock"><a href="#" class="mdRGT12Unblock"><%= BUDDY_MENU_UNBLOCKBUDDY %></a></li>
+                {{/isBlockOrDeleteBlock}}
+                {{^isBlockOrDeleteBlock}}
+                <li data-click-name="block"><a href="#"><%= BUDDY_MENU_BLOCKBUDDY %></a></li>
+                {{/isBlockOrDeleteBlock}}
+                {{/isShowBlock}}
+                {{/isMe}}
+            </ul>
+        </div>
+        </div></script><script id="TEMPLATE_ROOM_DETAIL" type="text/template"><button data-click-name="close" type="button" class="MdBtn01Close02"><%= COMMON_CLOSE %></button>
+        <div id="_chat_room_detail_header_area" class="MdBox04">
+            <div id="_chat_room_detail_thumbnail_list" class="MdCMN09ImgEdit">
+
+            </div>
+            <div class="MdRGT11Head">
+                <div class="mdRGT11Ttl" id="_chat_room_detail_display_name">{{displayName}}</div>
+                {{#notification}}
+                <button id="_chat_room_detail_notification" data-click-name="toggle_notification" type="button" class="MdBtn01AlertsOn" title="<%=BUDDY_MENU_ALARMON%>"></button>
+                {{/notification}}
+                {{^notification}}
+                <button id="_chat_room_detail_notification" data-click-name="toggle_notification" type="button" class="MdBtn01AlertsOff" title="<%=BUDDY_MENU_ALARMOFF%>"></button>
+                {{/notification}}
+            </div>
+            <div class="MdRGT12List">
+                <ul class="">
+                    <li data-click-name="add_friend"><a href="#"><%= BUDDY_GROUP_INVITE_TITLE %></a></li>
+                    <li data-click-name="leave_room"><a href="#"><%= BUDDY_MENU_LEAVE %></a></li>
+                    <li data-click-name="create_group"><a href="#"><%= BUDDY_GROUP_CREATE_TITLE %></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="_chat_room_detail_scroll" class="MdScroll mdScroll02">
+            <div class="MdRGT13List">
+                <div class="mdRGT13Nav">
+                    <button id="_chat_room_detail_member_count" type="button" class="ExSelected">{{memberCount}}</button>
+                </div>
+                <ul class="mdRGT13Ul" id="_chat_room_detail_member_list">
+                </ul>
+            </div>
+        </div></script><script id="TEMPLATE_ROOM_DETAIL_THUMBNAIL_ITEM" type="text/template">{{#thumbnailList}}
+        <div class="mdCMN09ImgInner">
+            <img data-picture-path="{{picturePath}}" src="{{defaultPath}}" width="111" height="111" alt="">
+        </div>
+        {{/thumbnailList}}</script><script id="TEMPLATE_ROOM_DETAIL_ITEM" type="text/template"><div class="mdRGT13Img">
+            {{#thumbnailList}}
+            <img data-picture-path="{{picturePath}}" src="{{defaultPath}}" width="35" height="35" alt="">
+            {{/thumbnailList}}
+        </div>
+        <div class="mdRGT13Ttl">{{displayName}}</div></script><script id="TEMPLATE_IMAGE_VIEWER" type="text/template"><div id="wrap_single_image" class="MdLYR02Viewer MdNonDisp"></div></script><script id="TEMPLATE_SINGLE_IMAGE_VIEWER_ITEM" type="text/template">{{#isChatImage}}
+        <div class="mdLYR02Pagination" id="wrap_single_image_page"></div>
+        {{/isChatImage}}
+        <button type="button" class="MdBtn01Close03" id="image_viewer_close"><%= COMMON_CLOSE %></button>
+        <div class="mdLYR02ImgBox _image_viewer_area">
+            <button type="button" class="mdLYR02Prev" id="image_viewer_prev_btn">Preview</button>
+            <button type="button" class="mdLYR02Next" id="image_viewer_next_btn">Next</button>
+            <div id="wrap_single_image_list" class="">
+                <div id="wrap_single_image_panel1" class="mdLYR02Img">
+                    <div class="MdLoading02 _viewer_loading">Loading...</div>
+                    <img src="" alt="" style="transform: translate(0px, 0px) scale(1);">
+                    <p class="MdTxtCaution01 MdNonDisp"><%= CHAT_EDIT_ALERT_UNAVAILABLE_PICTURE %></p>
+                </div>
+                <div id="wrap_single_image_panel2" class="mdLYR02Img">
+                    <div class="MdLoading02 _viewer_loading">Loading...</div>
+                    <img src="" alt="" style="transform: translate(0px, 0px) scale(1);">
+                    <p class="MdTxtCaution01 MdNonDisp"><%= CHAT_EDIT_ALERT_UNAVAILABLE_PICTURE %></p>
+                </div>
+                <div id="wrap_single_image_panel3" class="mdLYR02Img">
+                    <div class="MdLoading02 _viewer_loading">Loading...</div>
+                    <img src="" alt="" style="transform: translate(0px, 0px) scale(1);">
+                    <p class="MdTxtCaution01 MdNonDisp"><%= CHAT_EDIT_ALERT_UNAVAILABLE_PICTURE %></p>
+                </div>
+            </div>
+
+        </div>
+        {{#isChatImage}}
+        <div class="mdLYR02Head">
+            <div class="mdLYR02HeadImg"><img src="" alt="" width="36" height="36" id="image_viewer_sender_profile"></div>
+            <div class="mdLYR02HeadTxt"><p class="mdLYR02Ttl" id="image_viewer_sender_name"></p>
+                <p class="mdLYR02Date">
+                    <time id="image_viewer_send_time"></time>
+                </p>
+            </div>
+            <div class="mdLYR02Controller">
+                <button type="button" class="listView" id="image_viewer_seeall" title="<%= CHATROOM_MENU_SEEALLPHOTO %>"><%= CHATROOM_MENU_SEEALLPHOTO %></button>
+                <button type="button" class="sizeCont" id="image_viewer_size_controller"><%= IMAGE_VIEWER_ORIGINALSIZE %></button>
+                <button type="button" class="zoomIn" id="image_viewer_zoomin"><%= IMAGE_VIEWER_ZOOMIN %></button>
+                <button type="button" class="zoomOut" id="image_viewer_zoomout"><%= IMAGE_VIEWER_ZOOMOUT %></button>
+            </div>
+            <button type="button" class="MdBtn01Down01" id="image_viewer_download">Download</button>
+        </div>
+        {{/isChatImage}}</script><script id="TEMPLATE_SINGLE_VIDEO_VIEWER_ITEM" type="text/template"><button type="button" class="MdBtn01Close03" id="image_viewer_close"><%= COMMON_CLOSE %></button>
+        <div class="mdLYR02ImgBox _image_viewer_area">
+            <div class="MdLoading02" id="video_viewer_indicator">Loading...</div>
+            <div class="MdLoadingState MdNonDisp">
+                <%= MEDIA_MSG_ERR_COPYINPROGRESS %>
+            </div>
+            <div id="wrap_single_image_list" class="">
+                <div id="wrap_single_video_panel" class="mdLYR02Img mdLYR02Video">
+                    <video src="" alt="" controls="true" class="MdNonDisp"></video>
+                    <p class="MdTxtCaution01 MdNonDisp"><%= CHAT_EDIT_ALERT_UNAVAILABLE_PICTURE %></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="mdLYR02Head">
+            <div class="mdLYR02HeadImg"><img src="{{profileUrl}}" data-picture-path="{{picturePath}}" alt="{{placeHolderDisplayName}}" width="36" height="36" id="video_viewer_sender_profile"></div>
+            <div class="mdLYR02HeadTxt"><p class="mdLYR02Ttl" id="video_viewer_sender_name">{{printName}}</p>
+
+                <p class="mdLYR02Date">
+                    <time id="video_viewer_send_time">{{messageTime}}</time>
+                </p>
+            </div>
+            <div class="mdLYR02Pagination" id="wrap_single_image_page"></div>
+            <div class="mdLYR02Controller">
+                <button type="button" class="listView" id="video_viewer_seeall" title="<%= CHATROOM_MENU_SEEALLVIDEO %>"><%= CHATROOM_MENU_SEEALLVIDEO %></button>
+            </div>
+            <button type="button" class="MdBtn01Down01" id="video_viewer_download">Download</button>
+        </div></script><script id="TEMPLATE_COLLECTION_VIEWER" type="text/template"><div id="wrap_collection_viewer" class="MdLYR02Viewer">
+            <div id="collection_viewer_container" style="height:100%">
+                <div class="MdLoading02">Loading...</div>
+            </div>
+        </div></script><script id="TEMPLATE_COLLECTION_VIEWER_LAYOUT" type="text/template"><div class="mdLYR02ListViewTitle" id="wrap_collection_viewer_header">
+            <p class="room_title"></p>
+        </div>
+        <button type="button" class="MdBtn01Close03" id="collection_viewer_close"><%= COMMON_CLOSE %></button>
+        <div class="mdLYR02ListBox MdScroll mdScroll03">
+            <ul class="mdLYR02ListUl _collection_item_list">
+            </ul>
+        </div></script><script id="TEMPLATE_COLLECTION_VIEWER_IMAGE_ITEM" type="text/template"><a class="mdLYR02toImage"><span></span></a></script><script id="TEMPLATE_COLLECTION_VIEWER_VIDEO_ITEM" type="text/template"><a class="mdLYR02toMovie"><span></span></a>
+        <div class="progressUI" id="collection_video_download_progress">
+            <span class="bar"><span style="width:0%"></span></span>
+            <span class="txt"><span>0</span>%</span>
+            <button type="button" name="" class="close _cancelDownload">close</button>
+        </div></script><script id="TEMPLATE_COLLECTION_VIEWER_LINK_ITEM" type="text/template"><a class="mdLYR02toLink" target="_blank">
+            <div class="mdLYR02LinkType loading" id="mdLYR02LinkType">
+                <div class="linkView">
+                    <div class="thumb">
+                        <img src="" alt="">
+                    </div>
+                    <div class="detail">
+                        <div class="title"></div>
+                        <div class="des"></div>
+                        <div class="url _urlWrap"></div>
+                    </div>
+                </div>
+            </div>
+        </a></script><script id="TEMPLATE_SETTINGS_LAYOUT" type="text/template"><div class="LyContents _settings_ani_wrap" style="width:100%;z-index:10;position:absolute;">
+            <div class="LyLFT MdPB0">
+                <ul class="MdLFT06List" id="settings_menu_list">
+                </ul>
+            </div>
+
+            <div class="LyRGT MdPB0" id="settings_contents"></div>
+        </div>
+        <div class="MdOverlay01 MdNonDisp" id="settings_regist_emain_layer">
+            <div class="MdLYR03Box mdLYR03New">
+            </div>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_BASIC_ITEM_VIEW" type="text/template"><h1 class="MdHide">Basic</h1>
+
+        <div class="MdBox01">
+            <section class="MdRGT02Set">
+                <div class="MdCMN09ImgEdit">
+                    <input type="button" class="mdCMN09ImgInput" style="background-image: url({{profile.profileUrl}}); cursor:default;">
+                    <input type="button" class="MdIcoEdit01 _profile_edit" title="<%= SETTINGPROFILE_LABEL_MODIFYPROFILE %>">
+                </div>
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl"><%= SETTINGPROFILE_LABEL_NICKNAME %></h2>
+
+                        <div class="mdRGT02Input">
+                            <span contenteditable="true" id="settings_basic_name_input" spellcheck='false' placeholder="{{placeholderDisplayName}}">{{profile.displayName}}</span>
+                            <span class="mdRGT02Count" id="settings_basic_name_count">{{profile.displayNameCount}}/20</span>
+                            <button type="button" class="MdBtn01Delete01 MdNonDisp" id="settings_basic_name_restore"><%= COMMON_DEL %></button>
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl"><%= SETTINGPROFILE_LABEL_STATUSMESSAGE %></h2>
+                        <p class="mdRGT02Desc" id="settings_basic_status_message">{{profile.statusMessage}}</p>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl"><%= SETTINGPROFILE_LABEL_USERID %></h2>
+                        <p class="mdRGT02Desc" id="settings_basic_userId">{{profile.userid}}</p>
+                    </li>
+                    <li {{^isIdentityProvider}}class="MdNonDisp" {{
+                    /isIdentityProvider}}>
+                    <h2 class="mdRGT02Ttl"><%= LOGIN_EMAILLOGIN_PLACEHOLDER_EMAIL %></h2>
+                    {{#isIdentityProvider}}
+                    <p id="settings_basic_email" class="mdRGT02Desc{{^isEmail}} MdNonDisp{{/isEmail}}">{{#isEmail}}{{email}}{{/isEmail}}</p>
+                    <!-- <p class="mdRGT02Desc{{#isEmail}} MdNonDisp{{/isEmail}}" id="settings_basic_regist_email"><a href="#" class="mdRGT02Link" id="settings_basic_regist_email_btn"><%=
+                        LOGINHELP_EMAILLOGIN_LABEL_TITLE %></a></p> -->
+                    {{/isIdentityProvider}}
+                    {{^isIdentityProvider}}
+                    <p id="settings_basic_email" class="mdRGT02Desc MdNonDisp"><%= SETTINGPROFILE_LABEL_STATUSEMPTY %></p>
+                    <p class="mdRGT02Desc MdNonDisp" id="settings_basic_regist_email"><a href="#" class="mdRGT02Link" id="settings_basic_regist_email_btn"><%= LOGINHELP_EMAILLOGIN_LABEL_TITLE %></a>
+                    </p>
+                    {{/isIdentityProvider}}
+                    </li>
+                </ul>
+            </section>
+
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl"><%= SETTING_BASIC_HEADING_LANGUAGE %></h2>
+
+                <div class="MdSelectBox01" style="width:210px;">
+                    <select id="settings_select_language">
+                        <option value="en" {{#lang.en}} selected{{
+                        /lang.en}}>English</option>
+                        <option value="ja" {{#lang.ja}} selected{{
+                        /lang.ja}}>日本語</option>
+                        <option value="ko" {{#lang.ko}} selected{{
+                        /lang.ko}}>한국어</option>
+                        <option value="zh_CN" {{#lang.zh_CN}} selected{{
+                        /lang.zh_CN}}>简体中文</option>
+                        <option value="zh_TW" {{#lang.zh_TW}} selected{{
+                        /lang.zh_TW}}>繁體中文</option>
+                        <option value="th" {{#lang.th}} selected{{
+                        /lang.th}}>ภาษาไทย</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl"><%= SETTING_FONT_LABEL %></h2>
+                <div class="mdRGT02Desc"><%= SETTING_FONT_DESC %></div>
+                <div class="MdSelectBox01" style="width: 210px;">
+                    <select id="settings_select_fontSize">
+                        <option value="small"><%= SETTING_FONT_SMALL %></option>
+                        <option value="normal"><%= SETTING_FONT_NORMAL %></option>
+                        <option value="large"><%= SETTING_FONT_LARGE %></option>
+                        <option value="extraLarge"><%= SETTING_FONT_EXTRALARGE %></option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="MdRGT02Set MdNonDisp" id="unregisterSecondaryDevice">
+                <h2 class="mdRGT02Ttl"><%=SETTING_BASIC_DELETE_ACCOUNT_TITLE %></h2>
+                <button type="button" class="MdBtn03D03 mdBtn03SS2" id="unregisterSecondaryDeviceBtn"><%=SETTING_BASIC_DELETE_ACCOUNT_BTN %></button>
+            </section>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_CHATS_ITEM_VIEW" type="text/template"><h1 class="MdHide"><%= SETTING_TALK %></h1>
+
+        <div class="MdBox01">
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl"><%= SETTING_LABEL_BASIC_SEND_KEY %></h2>
+                <ul class="MdRGT03List">
+                    <li class="_enter"><label class="MdRadio01"><input type="radio" name="settings_chats" {{#isSendKeyEnter}}checked="" {{/isSendKeyEnter}}><span class="mdRadio01Txt"><%= SETTING_SENDKEY_ENTER %> – <%= SETTING_SENDKEY_SENDMESSAGE %>, <%= SETTING_SENDKEY_SHIFT_ENTER %> – <%= SETTING_SENDKEY_NEWLINE %></span></label>
+                    </li>
+                    <li class="_altEnter"><label class="MdRadio01"><input type="radio" name="settings_chats" {{#isSendKeyAltEnter}}checked="" {{/isSendKeyAltEnter}}><span class="mdRadio01Txt">{{#isMac}}<%= SETTING_SENDKEY_COMMAND_ENTER %>{{/isMac}}{{^isMac}}<%= SETTING_SENDKEY_ALT_ENTER %>{{/isMac}} – <%= SETTING_SENDKEY_SENDMESSAGE %>, <%= SETTING_SENDKEY_ENTER %> – <%= SETTING_SENDKEY_NEWLINE %></span></label>
+                    </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl"><%= SETTING_CHATS_PHOTO_RESOLUTION_TITLE %></h2>
+                <div class="mdRGT02Desc"><%= SETTING_CHATS_PHOTO_RESOLUTION_DESC %></div>
+                <div class="MdSelectBox01" style="width: 210px;">
+                    <select id="settings_image_origin">
+                        <option value="original" {{#isImageQualityOriginal}}selected="selected" {{
+                        /isImageQualityOriginal}}><%= SETTING_CHATS_PHOTO_RESOLUTION_OPTION_ORIGINAL %></option>
+                        <option value="medium" {{#isImageQualityMedium}}selected="selected" {{
+                        /isImageQualityMedium}}><%= SETTING_CHATS_PHOTO_RESOLUTION_OPTION_STANDARD %></option>
+                    </select>
+                </div>
+            </section>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_NOTIFICATIONS_ITEM_VIEW" type="text/template"><h1 class="MdHide"><%= SETTING_LALARM %></h1>
+
+        <div class="MdBox01">
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl"><%= SETTING_LABEL_BASIC_ALARMMODE %></h2>
+                <ul class="MdRGT03List mdRGT03Inline">
+                    <li class="_notifyByPopup"><label class="MdCheckbox01"><input type="checkbox" {{#notifyByPopup}}checked="" {{/notifyByPopup}}><span
+                            class="mdCheckbox01Txt"><%= SETTING_LABEL_BASIC_ALARMMODE_SHOWALARM %></span></label></li>
+                    <li class="_showPreview"><label class="MdCheckbox01"><input type="checkbox" {{#showPreview}}checked="" {{/showPreview}}{{^notifyByPopup}}
+                        disabled="disabled"{{/notifyByPopup}}><span
+                                class="mdCheckbox01Txt"><%= SETTINGALARM_LABEL_TOASTPREVIEW %></span></label>
+                    </li>
+                    <li class="_notifyBySound"><label class="MdCheckbox01"><input type="checkbox" {{#notifyBySound}}checked="" {{/notifyBySound}}><span
+                            class="mdCheckbox01Txt"><%= SETTING_LABEL_BASIC_ALARMMODE_SOUNDALARM %></span></label></li>
+                </ul>
+            </section>
+
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl"><%= SETTING_LABEL_BASIC_ALARMRULE %></h2>
+                <ul class="MdRGT03List">
+                    <li class="_notifyForNewMessage"><label class="MdCheckbox01">
+                        <input type="checkbox" {{#notifyForNewMessage}}checked="" {{/notifyForNewMessage}}{{^notifyByPopup}} disabled="disabled"{{/notifyByPopup}}>
+                        <span class="mdCheckbox01Txt"><%= SETTING_LABEL_BASIC_ALARMRULE_NEWCHATALARM %></span></label>
+                    </li>
+                    <li class="_notifyNewGroupInvitation"><label class="MdCheckbox01">
+                        <input type="checkbox" {{#notifyNewGroupInvitation}}checked="" {{/notifyNewGroupInvitation}}{{^notifyByPopup}} disabled="disabled"{{/notifyByPopup}}>
+                        <span class="mdCheckbox01Txt"><%= SETTING_LABEL_BASIC_ALARMRULE_GROUPINVITEALARM %></span></label>
+                    </li>
+                    <li class="_notificationDisabledWithSub"><label class="MdCheckbox01">
+                        <input type="checkbox" {{#notificationDisabledWithSub}}checked="" {{/notificationDisabledWithSub}}>
+                        <span class="mdCheckbox01Txt"><%= SETTING_LABEL_BASIC_ALARMRULE_NOMOBILEALARMWHILEUSINGPC %></span></label></li>
+                </ul>
+            </section>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_FRIENDS_ITEM_VIEW" type="text/template"><h1 class="MdHide"><%= SETTING_FRIENDS %></h1>
+
+        <div class="MdBox02">
+            <div class="MdRGT02Set" id="settings_friends_block_list">
+            </div>
+
+            <div class="MdRGT02Set" id="settings_friends_hidden_list">
+            </div>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_FRIENDS_LIST_ITEM_VIEW" type="text/template"><h2 class="mdRGT02Ttl">{{displayName}} <em class="MdColor01 _count">0</em></h2>
+
+        <div class="MdScroll mdScroll02 _scroll" style="height: 467px;">
+            <ul class="MdCMN03List ExHover">
+            </ul>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_ABOUT_LINE_ITEM_VIEW" type="text/template"><h1 class="MdHide"><%= SETTING_LINE_ABOUT %></h1>
+
+        <div class="MdBox01">
+            <section class="MdRGT01Set">
+                <div class="mdRGT01Head"><a href="#" class="MdTxtLine">Version. {{applicationVersion}}</a></div>
+                <p class="mdRGT01Desc01"><a href="http://terms.line.me/line_terms" target="_blank" class="MdTxtLink02"><%= COMMON_LICENSE_TITLE %></a></p>
+
+                <p class="mdRGT01Desc01"><a href="http://terms.line.me/line_chrome_opensource" target="_blank" class="MdTxtLink02"><%= COMMON_MSG_LICENSE_OPENSOURCE %></a></p>
+            </section>
+        </div></script><script id="TEMPLATE_SETTINGS_CONTENTS_HELP_ITEM_VIEW" type="text/template">help!!!</script><script id="TEMPLATE_SETTINGS_MENU_ITEM_VIEW" type="text/template"><div href="#">{{menuName}}</div></script><script id="TEMPLATE_SETTINGS_FREINDS_LIST_ITEM_VIEW" type="text/template"><div class="MdCMN04Item">
+            <div class="mdCMN04Img">
+                <img src="{{profileUrl}}" width="46" height="46" alt="" class="_profile_img">
+            </div>
+            <div class="mdCMN04Txt">
+                <div class="mdCMN04Head">
+                    <span class="mdCMN04Ttl">{{printName}}</span>
+                </div>
+            </div>
+            <div class="mdCMN04Opt">
+                <button type="button" class="MdBtn03D03 mdBtn03S _settings_friends_edit" data-mid="{{mid}}"><%= SETTINGPROFILE_LABEL_MODIFYPROFILE %></button>
+            </div>
+        </div></script><script id="TEMPLATE_SETTINGS_FREINDS_LIST_NO_ITEM_VIEW" type="text/template"><div class="MdTxtCaution01">{{#isBlock}}<%=SETTINGPRIVACY_LABEL_BLOCKBUDDYLISTEMPTY%>{{/isBlock}}{{^isBlock}}<%=SETTINGPRIVACY_LABEL_HIDDENBUDDYLISTEMPTY%>{{/isBlock}}</div></script><script id="TEMPLATE_SETTINGS_ABOUT_LINE" type="text/template"><dialog open="" class="MdLYR01Box mdLYR01Type01 mdLYR01P50" role="dialog" style="min-width:350px">
+            <div class="mdLYR01Type01Inner">
+                <div class="mdLYR01Ver">
+                    Version {{applicationVersion}}
+                </div>
+                <div class="table mdLYR01Link">
+                    <div class="table-row">
+                        <div class="table-cell terms">
+                            <a href="http://terms.line.me/line_terms" target="_blank">{{COMMON_LICENSE_TITLE}}</a>
+                        </div>
+                        <div class="table-cell notices">
+                            <a href="http://terms.line.me/line_chrome_opensource" target="_blank">{{COMMON_MSG_LICENSE_OPENSOURCE}}</a>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="mdLYR01BtnClose">Close</button>
+            </div>
+        </dialog></script><script id="TEMPLATE_COMMON_NOT_CONNECT_NETWORK" type="text/template"><div class="MdLFT03Notice mdLFT03Type01" style="position: absolute;z-index:50;" id="wrap_right_network_alarm"><p class="MdTxtInfo03"><%= COMMON_NETWORK_UNREACHABLE %></p></div></script><script id="TEMPLATE_NOTE_LAYOUT" type="text/template"><div class="LyContents _note_ani_wrap" style="width:100%;z-index:10;position:absolute;">
+
+            <div class="LyLFT MdPB0">
+                <div class="MdLFT01Search _wrap_search">
+                    <div class="mdLFT01Inner">
+                        <input type="text" class="mdLFT01Input" id="note_search_input" placeholder="<%= MEMO_LABEL_SEARCH %>" value="">
+                        <button type="button" class="MdBtn01Delete01 MdNonDisp _btn_input_clear" title="<%= COMMON_DEL %>"><%= COMMON_DEL %></button>
+                    </div>
+                    <button type="button" id="new_memo" class="MdBtn01Note" title="<%= MEMO_LABEL_NEWMEMO %>"><%= MEMO_LABEL_NEWMEMO %></button>
+                </div>
+
+                <div id="note_list_wrap" class="MdScroll mdScroll01" style="height: 467px;">
+                    <h1 class="MdHide"><%= GNB_LABEL_MEMO %></h1>
+                    <ul class="MdCMN03List ExHover mdCMN03Note" id="note_list_contents"></ul>
+                </div>
+            </div>
+
+
+            <div class="LyRGT MdPB0">
+                <div id="note_contents_wrap" style="position:relativel;min-width:272px;"></div>
+            </div>
+
+        </div></script><script id="TEMPLATE_NOTE_LIST_ITEM" type="text/template"><div class="MdCMN05Item">
+            <div class="mdCMN05Txt">
+                <p class="mdCMN05Date">
+                    <time>{{modifiedTime}}</time>
+                </p>
+                <h2 class="mdCMN05Ttl">{{title}}</h2>
+                <p class="mdCMN05Desc">{{summary}}</p>
+            </div>
+            <div class="mdCMN05Img MdNonDisp"><img src="" class="_note_thumb"></div>
+        </div></script><script id="TEMPLATE_NOTE_SEARCH_NO_ITEM" type="text/template"><p class="MdTxtCaution02"><%= SEARCH_NORESULT %></p></script><script id="TEMPLATE_NOTE_VIEWER_ITEM" type="text/template"><div class="MdRGT08Head">
+            <p class="mdRGT08Date">
+                <time class="_note_viewer_time">{{modifiedTime}}</time>
+            </p>
+            <div class="mdRGT08BtnSet">
+                <button type="button" class="MdBtn01Image" id="note_insert_image" title="<%= MEMO_LABEL_ADDPHOTO %>"><%= MEMO_LABEL_ADDPHOTO %></button>
+                <button type="button" class="MdBtn01Capture" id="note_capture" title="<%= GNB_LABEL_CAPTURE %>"><%= GNB_LABEL_CAPTURE %></button>
+                <button type="button" class="MdBtn01Sync" id="note_sync" title="<%= MEMO_LABEL_SYNC %>"><%= MEMO_LABEL_SYNC %></button>
+                <button type="button" class="MdBtn01Option" id="note_option">Option</button>
+            </div>
+        </div>
+        <div class="MdNote01Cont _note_contents_dimmed"><!--[NOTE] Drag Photo : ExDisabled -->
+            <div class="mdNote01Inner MdScroll mdScroll02 _note_contents" id="note_contents"></div>
+        </div>
+        <div class="MdNote02Notice MdNonDisp _note_drag_here" style="pointer-events:none;" id="note_drag_here"><%= MEMO_LABEL_PHOTO %></div></script><script id="TEMPLATE_NOTE_CONTENTS_EMPTY_ITEM" type="text/template"><div id="note_title_area" class="mdNote01Head _note_title_area" contenteditable="true" placeholder="<%= MEMO_LABEL_TITLE %>"></div>
+        <div id="note_contents_area" class="mdNote01Desc _note_contents_area" contenteditable="true" placeholder="<%= MEMO_LABEL_WRITE %>"></div></script><script id="TEMPLATE_NOTE_ZERO_ITEM" type="text/template"><div id="note_title_area" class="mdNote01Head _note_title_area" contenteditable="true" placeholder="<%= MEMO_LABEL_TITLE %>"><%= MEMO_LABEL_INTRO1 %></div>
+        <div id="note_contents_area" class="mdNote01Desc _note_contents_area" contenteditable="true" placeholder="<%= MEMO_LABEL_WRITE %>">
+            <%= MEMO_LABEL_INTRO2 %>
+            <div><%= MEMO_LABEL_INTRO3 %></div>
+            <div><img src="#img_url" style="width:100%;max-width:#max-widthpx"></div>
+        </div></script><script id="TEMPLATE_NOTE_HTML" type="text/template"><!DOCTYPE html>
+    <html lang="{{lang}}">
+    <head>
+        <meta charset="UTF-8">
+        <title><%= GNB_LABEL_LINE_TITLE %></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <style>@charset "UTF-8";
+        html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, textarea, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            font-size: 100%
+        }
+
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            display: block
+        }
+
+        b, strong {
+            font-weight: 700
+        }
+
+        nav, ol, ul {
+            list-style: none
+        }
+
+        img {
+            border: 0;
+            vertical-align: top
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0
+        }
+
+        input, button, textarea {
+            line-height: 1.308;
+            color: #333;
+            font-family: Arimo, Tahoma, '나눔고딕', NanumGothic, \B098\B214\ACE0\B515, '맑은 고딕', 'Malgun Gothic', \B9D1\C740\0020\ACE0\B515, '돋움', 'Dotum', \B3CB\C6C0, sans-serif;
+            font-size: 13px
+        }
+
+        select, input, button {
+            font-size: 100%;
+            margin: 0;
+            vertical-align: baseline
+        }
+
+        button, input {
+            line-height: normal
+        }
+
+        button, html input[type="button"], input[type="reset"], input[type="submit"] {
+            cursor: pointer
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            box-sizing: border-box;
+            padding: 0
+        }
+
+        textarea {
+            overflow-x: hidden;
+            overflow-y: auto;
+            vertical-align: top
+        }
+
+        :focus {
+            outline: 0
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 400
+        }
+
+        em, cite {
+            font-style: normal
+        }
+
+        table, th, td {
+            border: none
+        }
+
+        fieldset {
+            border: none
+        }
+
+        fieldset legend {
+            position: absolute;
+            left: -9999px;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0
+        }
+
+        hr {
+            display: none
+        }
+
+        input, button, textarea {
+            border: 0
+        }
+
+        body {
+            background-color: #d3dae2;
+            line-height: 1.308;
+            color: #333;
+            font-family: Arimo, Tahoma, '나눔고딕', NanumGothic, \B098\B214\ACE0\B515, '맑은 고딕', 'Malgun Gothic', \B9D1\C740\0020\ACE0\B515, '돋움', 'Dotum', \B3CB\C6C0, sans-serif;
+            font-size: 13px;
+            -webkit-appearance: none
+        }
+
+        html[lang="ko"] body {
+            font-family: '나눔고딕', NanumGothic, \B098\B214\ACE0\B515, '맑은 고딕', 'Malgun Gothic', \B9D1\C740\0020\ACE0\B515, '돋움', 'Dotum', \B3CB\C6C0, sans-serif
+        }
+
+        html[lang="ja"] body {
+            font-family: 'Meiryo UI', Meiryo, 'Hiragino Kaku Gothic ProN', 'MS PGothic', sans-serif
+        }
+
+        html[lang="zh_CN"] body, html[lang="zh_TW"] body {
+            font-family: 'MS JhengHei', 'MS PGothic', sans-serif
+        }
+
+        html[lang="th"] body {
+            font-family: Tahoma, 'Arial Unicode MS', sans-serif
+        }
+
+        html[lang="ko"] body.ExOsMac {
+            font-family: 'Apple SD Gothic Neo', '나눔고딕', NanumGothic, \B098\B214\ACE0\B515, 'Arial Unicode MS', sans-serif
+        }
+
+        html[lang="ja"] body.ExOsMac {
+            font-family: Meiryo, 'Hiragino Kaku Gothic ProN', 'Arial Unicode MS', sans-serif
+        }
+
+        html[lang="zh_CN"] body.ExOsMac, html[lang="zh_TW"] body.ExOsMac {
+            font-family: 'Hiragino Sans GB', 'Arial Unicode MS', sans-serif
+        }
+
+        a:link, a:visited {
+            text-decoration: none
+        }
+
+        a:hover, a:active, a:focus {
+            text-decoration: none
+        }
+
+        button {
+            background-color: transparent;
+            padding: 0
+        }
+
+        ::-webkit-scrollbar-button {
+            width: 0;
+            height: 0;
+            display: none
+        }
+
+        ::-webkit-scrollbar-corner {
+            background-color: transparent
+        }
+
+        input, button, textarea {
+            font-family: inherit
+        }
+
+        .MdNote01Cont .mdNote01Desc {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        .MdCF:after {
+            content: "";
+            display: block;
+            clear: both
+        }
+
+        .MdHide {
+            position: absolute;
+            left: -9999px
+        }
+
+        .MdNonDisp {
+            display: none !important
+        }
+
+        .MdFontB {
+            font-weight: 700 !important
+        }
+
+        .MdFontN {
+            font-weight: 400 !important
+        }
+
+        .MdLink01, .MdLink01:link, .MdLink01:visited, .MdLink01:hover, .MdLink01:active, .MdLink01:focus {
+            text-decoration: underline !important
+        }
+
+        .MdLink02, .MdLink02:link, .MdLink02:visited, .MdLink02:hover, .MdLink02:active, .MdLink02:focus {
+            text-decoration: none !important
+        }
+
+        .MdLink03, .MdLink03:link, .MdLink03:visited {
+            text-decoration: underline !important
+        }
+
+        .MdLink03:hover, .MdLink03:active, .MdLink03:focus {
+            text-decoration: none !important
+        }
+
+        .MdLink04, .MdLink04:link, .MdLink04:visited {
+            text-decoration: none !important
+        }
+
+        .MdLink04:hover, .MdLink04:active, .MdLink04:focus {
+            text-decoration: underline !important
+        }
+
+        .MdColorMark {
+            color: #0bc060 !important
+        }
+
+        .MdNote01Cont .mdNote01Inner {
+            color: #62666e
+        }
+
+        .MdNote01Cont .mdNote01Inner [placeholder]:empty:before {
+            content: attr(placeholder);
+            color: #b9bcc7
+        }
+
+        .MdNote01Cont a {
+            color: #047bfe
+        }
+
+        .MdNote01Cont .mdNote01Head {
+            font-size: 20px;
+            font-weight: 700;
+            color: rgba(52, 52, 52, 0.9);
+            line-height: 27px;
+            padding: 14px 36px 0
+        }
+
+        .MdNote01Cont .mdNote01Desc {
+            font-size: 13px;
+            color: rgba(72, 77, 87, 0.9);
+            line-height: 22px;
+            padding: 8px 36px 16px
+        }
+
+        .MdNote02Notice {
+            z-index: 3;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            font-size: 15px;
+            color: #969cab;
+            font-weight: 700;
+            text-align: center;
+            padding: 27px 0
+        }</style>
+    </head>
+    <body style="background-color:#fff">
+    <div class="MdNote01Cont">
+        <div class="mdNote01Inner _note_contents">
+            <!--note_contents-->
+            #noteContents#
+            <!--end_note_contents-->
+        </div>
+    </div>
+    </body>
+    </html></script><script id="TEMPLATE_WEBVIEW_LAYOUT_VIEW" type="text/template"><dialog role="dialog" open class="MdLYR01Box mdLYR01Type01 mdLYR01P50" style="width:324px;height:auto;padding:0px;z-index: 150">
+            <div id="webviewlayout_title"></div>
+            <div id="webviewlayout_body" ></div>
+        </dialog></script><script id="TEMPLATE_WEBVIEW_TITLE_ITEM_VIEW" type="text/template"><iframe></iframe></script><script id="TEMPLATE_WEBVIEW_ITEM_VIEW" type="text/template"><iframe></iframe></script><script id="TEMPLATE_DEBUG_LAYOUT" type="text/template"><div class="LyLFT MdPB0">
+            <ul class="MdLFT06List" id="debug_menu_list">
+            </ul>
+        </div>
+        <div class="LyRGT MdPB0" id="debug_contents"></div></script><script id="TEMPLATE_DEBUG_USER_ITEM_VIEW" type="text/template"><div class="MdBox01">
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">자동 로그인</h2>
+                <h3 class="mdRGT02Ttl">BETA</h3>
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">아이디</h2>
+                        <div class="mdRGT02Input">
+                            <input type="text" value="" class="debug_autologin_id_beta">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl">패스워드</h2>
+                        <div class="mdRGT02Input">
+                            <input type="password" value="" class="debug_autologin_pw_beta">
+                        </div>
+                    </li>
+                    <li>
+                        <button id="debug_autologin_save_beta" type="button" class="MdBtn03D03 mdBtn03S">저장</button>
+                    </li>
+                </ul>
+                <br/><br/>
+                <h3 class="mdRGT02Ttl">RC</h3>
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">아이디</h2>
+                        <div class="mdRGT02Input">
+                            <input type="text" value="" class="debug_autologin_id_rc">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl">패스워드</h2>
+                        <div class="mdRGT02Input">
+                            <input type="password" value="" class="debug_autologin_pw_rc">
+                        </div>
+                    </li>
+                    <li>
+                        <button id="debug_autologin_save_rc" type="button" class="MdBtn03D03 mdBtn03S">저장</button>
+                    </li>
+                </ul>
+
+            </section>
+        </div></script><script id="TEMPLATE_DEBUG_CONNECTION_ITEM_VIEW" type="text/template"><div class="MdBox01">
+            <section class="MdRGT02Set">
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">빌드 환경</h2>
+                        <p id="debug_build_phase" class="mdRGT02Desc"> - </p>
+                    </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">서버 환경</h2>
+                <ul class="MdRGT03List">
+                    <li>
+                        <label class="MdRadio01">
+                            <input type="radio" name="server_phase" value="0">
+                            <span class="mdRadio01Txt">BETA</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="MdRadio01">
+                            <input type="radio" name="server_phase" value="1">
+                            <span class="mdRadio01Txt">RC</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="MdRadio01">
+                            <input type="radio" name="server_phase" value="2">
+                            <span class="mdRadio01Txt">REAL</span>
+                        </label>
+                    </li>
+                </ul>
+
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">Test Env 설정</h2>
+                <ul class="mdRGT02Txt">
+                  <li>
+                    <h2 class="mdRGT02Ttl">name</h2>
+                    <div class="mdRGT02Input">
+                      <input type="text" value="talk-server-beta4" id="debug_test_env_input">
+                    </div>
+                  </li>
+                  <li>
+                    <button id="debug_test_env_save" type="button" class="MdBtn03D03 mdBtn03S">저장</button>
+                  </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">ConnInfo 변경</h2>
+                <ul class="MdRGT03List">
+                    <li>
+                        <label class="MdRadio01">
+                            <input type="radio" name="debug_conninfo_method" checked="checked" value="basicConninfo">
+                            <span class="mdRadio01Txt">
+                                기본 ConnInfo 사용하기
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="MdRadio01">
+                            <input type="radio" name="debug_conninfo_method" value="overwriteConninfo">
+                            <span class="mdRadio01Txt">
+                                수정된 ConnInfo 사용하기
+                            </span>
+                        </label>
+                    </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set" id="debug_conninfo_overwrite">
+                <h2 class="mdRGT02Ttl">수정된 ConnInfo 사용하기</h2>
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">Legy(Polling)</h2>
+                        <div class="mdRGT02Input">
+                            <input class="overwriteTitle" type="text" value="test" id="debug_conninfo_poller">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl">Legy(Thrift)</h2>
+                        <div class="mdRGT02Input">
+                            <input class="overwriteTitle" type="text" value="test" id="debug_conninfo_thrift">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl">OBS</h2>
+                        <div class="mdRGT02Input">
+                            <input class="overwriteTitle" type="text" value="test" id="debug_conninfo_obs">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl">Sticker</h2>
+                        <div class="mdRGT02Input">
+                            <input class="overwriteTitle" class="mdRGT02Ttl" type="text" value="test" id="debug_conninfo_sticker">
+                        </div>
+                    </li>
+                    <li>
+                        <button id="debug_conninfo_save" type="button" class="MdBtn03D03 mdBtn03S overwriteTitle">저장</button>
+                    </li>
+                </ul>
+            </section>
+        </div></script><script id="TEMPLATE_DEBUG_SYNC_ITEM_VIEW" type="text/template"><div class="MdBox01">
+            <section class="MdRGT02Set">
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">Last Op Rev</h2>
+                        <p id="debug_sync_last_rev" class="mdRGT02Desc"> - </p>
+                    </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">Long Poller Switch</h2>
+                <button id="_debug_poller_on" type="button" class="MdBtn03D03 mdBtn03S">On</button>
+                <button id="_debug_poller_off" type="button" class="MdBtn03D03 mdBtn03S">Off</button>
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">Reset Op Revision</h2>
+                <div class="MdSelectBox01" style="width:210px;">
+                    <select id="debug_sync_rev">
+                        <option value="0"> ---- 선택 ----</option>
+                        <option value="400">-400 Op</option>
+                        <option value="1000">-1000 Op</option>
+                        <option value="5000">-5000 Op</option>
+                        <option value="10000">-10000 Op</option>
+                        <option value="20000">-20000 Op</option>
+                        <option value="30000">-30000 Op</option>
+                        <option value="40000">-40000 Op</option>
+                        <option value="50000">-50000 Op</option>
+                    </select>
+                </div>
+            </section>
+        </div></script><script id="TEMPLATE_DEBUG_APP_INFO_ITEM_VIEW" type="text/template"><div class="MdBox01">
+            <section class="MdRGT02Set">
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">나의 MID</h2>
+                        <div class="mdRGT02Input" style="width:300px;">
+                            <input type="text" value="{{mid}}">
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <h2 class="mdRGT02Ttl">사용 중 용량</h2>
+                        <p id="debug_disk_quota_used" class="mdRGT02Desc"> - </p>
+                    </li>
+                    <li>
+                        <h2 class="mdRGT02Ttl">전체 용량</h2>
+                        <p id="debug_disk_quota_total" class="mdRGT02Desc"> - </p>
+                    </li>
+                </ul>
+            </section>
+        </div></script><script id="TEMPLATE_DEBUG_CHANNEL_TEST_ITEM_VIEW" type="text/template"><div class="MdBox01">
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">Channel Test</h2>
+                <ul class="mdRGT02Txt">
+                    <li>
+                        <button id="back_btn" type="button" class="MdBtn03D03 mdBtn03S overwriteTitle">◀</button>
+                        <button id="forward_btn" type="button" class="MdBtn03D03 mdBtn03S overwriteTitle">▶</button>
+                        <h2 class="mdRGT02Ttl" style="padding-left:10px">Channel Id</h2>
+                        <div class="mdRGT02Input">
+                            <input type="text" placeholder="1474078977 or URL" id="input_url">
+                        </div>
+                        <button id="go_btn" type="button" style="margin-left:10px" class="MdBtn03D03 mdBtn03S overwriteTitle">Go!</button>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <webview style="width:350px;height:510px"></webview>
+            </section>
+        </div></script><script id="TEMPLATE_DEBUG_APP_CONFIG_ITEM_VIEW" type="text/template"><div class="MdBox01">
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">E2EE</h2>
+                <div class="mdRGT02Desc">E2EE Message Marker Status (On/Off)</div>
+                <button id="_debug_e2ee_marker_switch" type="button" class="MdBtn03D03 mdBtn03S">OFF</button>
+            </section>
+            <section class="MdRGT02Set">
+              <h2 class="mdRGT02Ttl">New Room</h2>
+              <div class="mdRGT02Desc">Use new room</div>
+              <ul class="MdRGT03List">
+                <li>
+                  <label class="MdRadio01">
+                    <input type="radio" name="use_new_room" value="">
+                    <span class="mdRadio01Txt">Auto</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="MdRadio01">
+                    <input type="radio" name="use_new_room" value="Y">
+                    <span class="mdRadio01Txt">Y</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="MdRadio01">
+                    <input type="radio" name="use_new_room" value="N">
+                    <span class="mdRadio01Txt">N</span>
+                  </label>
+                </li>
+              </ul>
+            </section>
+            <section class="MdRGT02Set">
+                <h2 class="mdRGT02Ttl">Window</h2>
+                <ul class="MdRGT03List">
+                    <li>
+                        <label class="MdCheckbox01">
+                            <input id="_debug_config_always_on" type="checkbox" checked=""><span class="mdCheckbox01Txt">항상 위(Always on)</span></label>
+                    </li>
+                </ul>
+            </section>
+        </div></script></div><dialog id="error_viewer" style="margin:40px;width:80%;margin-left: auto; margin-right: auto;"><img src="/res/img/common/img_mdLFT05Error_404.png" style="display: table; margin-left: auto; margin-right: auto; margin-top:20px;margin-bottom: 20px"><div contenteditable="true" style="overflow-y: auto;height:300px"><h1 id="title"><b>Sorry - 사용에 불편을 드려서 죄송합니다. [닫기] 버튼을 눌러주세요..</b></h1><br><h1 style="color:red"><b>Error Message :</b><span id="errorMessage"></span> (<span id="errorPath"></span>)</h1><br><h1><b>Client Info :</b><br><span id="errorEnv"></span></h1><br><h1><b>Stacktrace :</b><br><span id="errorEnv"></span></h1><div id="content"></div><br></div><br><button id="_close">[닫기]</button></dialog><script real="" src="/src/GJkZY.js"></script><script real="" src="/src/cFHs_.js"></script></html>
